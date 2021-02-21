@@ -18,7 +18,11 @@ class ChatListViewController: UIViewController {
     
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
-}
+        
+        
+        
+        
+        }
 }
 
 extension ChatListViewController:UITableViewDelegate,UITableViewDataSource {
@@ -38,9 +42,12 @@ extension ChatListViewController:UITableViewDelegate,UITableViewDataSource {
         
     }
     
-    
-    
-}
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            print(#function)
+            let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
+            let chatRoomViewController = storyboard.instantiateViewController(identifier: "ChatRoomViewController")
+            navigationController?.pushViewController(chatRoomViewController, animated: true)
+    }}
 
 class ChatListTableViewCell: UITableViewCell {
     

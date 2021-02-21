@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9021174525E1549800557E05 /* ChatRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9021174425E1549800557E05 /* ChatRoom.storyboard */; };
+		9021174A25E1554C00557E05 /* ChatRoomViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9021174925E1554C00557E05 /* ChatRoomViewControllers.swift */; };
+		9021174F25E15B3D00557E05 /* ChatRoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9021174E25E15B3D00557E05 /* ChatRoomTableViewCell.xib */; };
+		9021175725E15D8700557E05 /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9021175625E15D8700557E05 /* ChatRoomTableViewCell.swift */; };
 		9035660025DDBFDA00513BDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903565FF25DDBFDA00513BDD /* AppDelegate.swift */; };
 		9035660225DDBFDA00513BDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035660125DDBFDA00513BDD /* SceneDelegate.swift */; };
 		9035660925DDBFDA00513BDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9035660825DDBFDA00513BDD /* Assets.xcassets */; };
@@ -35,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9021174425E1549800557E05 /* ChatRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatRoom.storyboard; sourceTree = "<group>"; };
+		9021174925E1554C00557E05 /* ChatRoomViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewControllers.swift; sourceTree = "<group>"; };
+		9021174E25E15B3D00557E05 /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
+		9021175625E15D8700557E05 /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
 		903565FC25DDBFDA00513BDD /* LainChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LainChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		903565FF25DDBFDA00513BDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9035660125DDBFDA00513BDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +84,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9021173F25E1498100557E05 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9035663A25DDC1A700513BDD /* ChatListViewController.swift */,
+				9021174925E1554C00557E05 /* ChatRoomViewControllers.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9021174025E149B800557E05 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				9035663225DDC06E00513BDD /* ChatList.storyboard */,
+				9021174425E1549800557E05 /* ChatRoom.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
 		903565F325DDBFDA00513BDD = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +125,12 @@
 		903565FE25DDBFDA00513BDD /* LainChat */ = {
 			isa = PBXGroup;
 			children = (
+				9021174025E149B800557E05 /* StoryBoards */,
+				9021173F25E1498100557E05 /* Controllers */,
 				903565FF25DDBFDA00513BDD /* AppDelegate.swift */,
+				9021174E25E15B3D00557E05 /* ChatRoomTableViewCell.xib */,
+				9021175625E15D8700557E05 /* ChatRoomTableViewCell.swift */,
 				9035660125DDBFDA00513BDD /* SceneDelegate.swift */,
-				9035663A25DDC1A700513BDD /* ChatListViewController.swift */,
-				9035663225DDC06E00513BDD /* ChatList.storyboard */,
 				9035660825DDBFDA00513BDD /* Assets.xcassets */,
 				9035660A25DDBFDA00513BDD /* LaunchScreen.storyboard */,
 				9035660D25DDBFDA00513BDD /* Info.plist */,
@@ -231,9 +259,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9021174F25E15B3D00557E05 /* ChatRoomTableViewCell.xib in Resources */,
 				9035660C25DDBFDA00513BDD /* LaunchScreen.storyboard in Resources */,
 				9035660925DDBFDA00513BDD /* Assets.xcassets in Resources */,
 				9035663325DDC06E00513BDD /* ChatList.storyboard in Resources */,
+				9021174525E1549800557E05 /* ChatRoom.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +291,8 @@
 				9035660025DDBFDA00513BDD /* AppDelegate.swift in Sources */,
 				9035663B25DDC1A700513BDD /* ChatListViewController.swift in Sources */,
 				9035660225DDBFDA00513BDD /* SceneDelegate.swift in Sources */,
+				9021175725E15D8700557E05 /* ChatRoomTableViewCell.swift in Sources */,
+				9021174A25E1554C00557E05 /* ChatRoomViewControllers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

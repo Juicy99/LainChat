@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 let storybaord = UIStoryboard(name: "ChatList", bundle: nil)
                 let chatListViewController = storybaord.instantiateViewController(identifier: "ChatListViewController")
-                let nav = UINavigationController(rootViewController: chatListViewController)
+        let nav = UINavigationController(rootViewController: chatListViewController)
                 
                 window.rootViewController = nav
         
