@@ -9,11 +9,14 @@ import UIKit
 class ChatRoomViewController: UIViewController {
     
     private let cellId = "cellId"
+    private var messgaes = [String]()
     
-    private var chatInputAccessoryView: ChatInputAccessoryView = {
+    private lazy var chatInputAccessoryView: ChatInputAccessoryView = {
         let view = ChatInputAccessoryView()
         view.frame = .init(x: 0, y: 0, width: view.frame.width, height: 100)
+        view.delegate = self
         return view
+        
     }()
     
     @IBOutlet weak var ChatRoomTableView: UITableView!
@@ -40,6 +43,17 @@ class ChatRoomViewController: UIViewController {
     }
     
 }
+
+extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
+    func tappedSendButton(text: String) {
+        messgaes.append(text)
+        chatInputAccessoryView.removetext()
+        ChatRoomTableView.reloadData()
+    }
+    
+    
+}
+
 extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -48,11 +62,14 @@ extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return messgaes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ChatRoomTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = ChatRoomTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as!
+        ChatRoomTableViewCell
+//        cell.messageTextView.text = messgaes[indexPath.row]
+        cell.messegeText = messgaes[indexPath.row]
     return cell
     }
 }
