@@ -6,7 +6,11 @@
 //
 
 import UIKit
+import Firebase
+
 class ChatRoomViewController: UIViewController {
+    
+    var user: User?
     
     private let cellId = "cellId"
     private var messgaes = [String]()
@@ -45,13 +49,34 @@ class ChatRoomViewController: UIViewController {
 }
 
 extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
+    
+    
     func tappedSendButton(text: String) {
-        messgaes.append(text)
-        chatInputAccessoryView.removetext()
-        ChatRoomTableView.reloadData()
+//
+//        messgaes.append(text)
+//        chatInputAccessoryView.removetext()
+//        ChatRoomTableView.reloadData()
+        
+        guard let name = user?.username else {return}
+        guard let uid = Auth.auth().currentUser?.uid else { return}
+        
+        
+        let docData = [
+            "name": name,
+            "createdAt": Timestamp(),
+            "uid": uid,
+            "messega": text
+        ] as [String : Any]
+        
+        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
+            if let err = err {
+                print("メッセージ情報の保存に失敗しました。\(err)")
+                return
+            }
+            print("メッセージの保存に成功しました。")
+            
+        }
     }
-    
-    
 }
 
 extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {

@@ -43,38 +43,62 @@ let imagePickerController = UIImagePickerController()
     }
     
     @objc private func tappedRegisterButton() {
-        Auth.auth().signInAnonymously() { (authResult, err) in
-            if let err = err {
-                print("認証情報の保存に失敗しました。\(err)")
-                return
-            }
-            print("認証情報の保存に成功しました。")
-
-            guard let user = authResult?.user else { return } // true
-            let uid = user.uid
-            guard let username = self.userNameTextField.text else { return }
-            let docData = [
-                "username": username,
-                "createdAt": Timestamp()
-                ] as [String : Any]
-            Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+        guard let image = profileImageButton.imageView?.image else {return}
+        guard let uploadimage = image.jpegData(compressionQuality: 0.01) else {return}
+        
+        let fileName = NSUUID().uuidString
+        let storegeRef = Storage.storage().reference().child("profile_image").child(fileName)
+        
+        
+        storegeRef.putData(uploadimage, metadata: nil){(metadata,err) in
+        if let err = err {
+            print("FireStorageへの情報の保存に失敗しました。\(err)")
+            return
+        }
+            storegeRef.downloadURL{ (url, err) in
                 if let err = err {
-                    print("Firestoreへの保存に失敗しました。\(err)")
+                    print("FireStoreからのダウンロードに失敗しました。 \(err)")
                     return
                 }
                 
-                print("Firestoreへの情報の保存が成功しました。")
-                self.dismiss(animated: true, completion: nil)
-                
+                guard let urlString = url?.absoluteString else { return }
+                self.createUserToFirestore(proFileImageUrl: urlString)
             }
-                   return
-               }
-            
+ 
+        }
+    }
 
+    private func createUserToFirestore(proFileImageUrl: String) {
+    Auth.auth().signInAnonymously() { (authResult, err) in
+        if let err = err {
+            print("認証情報の保存に失敗しました。\(err)")
+            return
+        }
+
+        guard let user = authResult?.user else { return } // true
+        let uid = user.uid
+        guard let username = self.userNameTextField.text else { return }
+        let docData = [
+            "username": username,
+            "createdAt": Timestamp(),
+            "proFileImageUrl": proFileImageUrl
+            ] as [String : Any]
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+            if let err = err {
+                print("Firestoreへの保存に失敗しました。\(err)")
+                return
+            }
+            
+            print("Firestoreへの情報の保存が成功しました。")
+            self.dismiss(animated: true, completion: nil)
             
         }
+               return
+           }
         
     }
+    
+}
 
 
 extension SignUpViewController: UITextFieldDelegate {
