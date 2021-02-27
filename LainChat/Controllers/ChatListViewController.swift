@@ -11,9 +11,7 @@ import Firebase
 class ChatListViewController: UIViewController {
     
     private let cellId = "cellId"
-    private var users = [User]()
-    
-    private var user: User? 
+    private var user: User?
     
     @IBOutlet weak var chatListTableView: UITableView!
     
@@ -41,24 +39,21 @@ class ChatListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchUserInfoFromFireStore()
+        fetchLoginUserInfo()
     }
-    private func fetchUserInfoFromFireStore(){
-        Firestore.firestore().collection("users").getDocuments { (snapshots, err) in
+    private func fetchLoginUserInfo() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
-                print("user情報の取得に失敗しました。\(err)")
+                print("ユーザー情報の取得に失敗しました。\(err)")
+                return
             }
             
-            snapshots?.documents.forEach({(snapshot) in
-                let dic = snapshot.data()
-                let user = User.init(dic: dic)
-                
-                self.users.append(user)
-                self.users.forEach{(user) in
-                    print("user.username: ",user.username)
-//                print("data: ", data)
-                }
-            })
+            guard let snapshot = snapshot, let dic = snapshot.data() else { return }
+            
+            let user = User(dic: dic)
+            self.user = user
         }
     }
 }
