@@ -98,4 +98,12 @@ class ChatListTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    private func dateFormatterForDateLabel(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "ja_JP")
+        return formatter.string(from: date)
+    }
 }
