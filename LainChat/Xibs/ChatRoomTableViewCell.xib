@@ -30,7 +30,7 @@
                             <constraint firstAttribute="width" constant="250" id="iBj-NN-n2l"/>
                         </constraints>
                         <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWB-V7-cuT" userLabel="Partnerdate Label">
@@ -39,14 +39,14 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
+                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="メッセージがここに入ります" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
                         <rect key="frame" x="173" y="25" width="240" height="93"/>
                         <color key="backgroundColor" red="0.60392156862745094" green="0.8784313725490196" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="240" id="LEa-Gz-crV"/>
                         </constraints>
                         <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIH-A5-hsj">
@@ -76,6 +76,7 @@
                 <outlet property="messegeTextViewWidthConstraint" destination="iBj-NN-n2l" id="jN4-W8-uT6"/>
                 <outlet property="myDateLabel" destination="tIH-A5-hsj" id="cKV-tM-EOu"/>
                 <outlet property="myMessageTextView" destination="Don-vp-Hvc" id="uAH-QW-nGQ"/>
+                <outlet property="myMessageTextViewWidthConstraint" destination="LEa-Gz-crV" id="LIP-dh-d9J"/>
                 <outlet property="partnerDateLabel" destination="mWB-V7-cuT" id="dPt-3O-PV7"/>
                 <outlet property="partnerMessageTextView" destination="qpc-Wk-y5D" id="54t-jC-3si"/>
                 <outlet property="userImageView" destination="XrL-kt-3AL" id="CbT-Tw-lZi"/>

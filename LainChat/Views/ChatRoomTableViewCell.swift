@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Nuke
 
 class ChatRoomTableViewCell: UITableViewCell {
     
@@ -14,14 +15,14 @@ class ChatRoomTableViewCell: UITableViewCell {
         didSet{
 //            guard  let text = messegeText else {return}
 //
-//            messageTextView.text = text
-            if let message = message{
-                partnerMessageTextView.text = message.message
-                let witdh = estimateFrameForTextView(text: message.message).width + 20
-                messegeTextViewWidthConstraint.constant = witdh
-                partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
-//                userImageView.image =
-            }
+////            messageTextView.text = text
+//            if let message = message{
+//                partnerMessageTextView.text = message.message
+//                let witdh = estimateFrameForTextView(text: message.message).width + 20
+//                messegeTextViewWidthConstraint.constant = witdh
+//                partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
+////                userImageView.image =
+//            }
         }
     }
     
@@ -31,6 +32,7 @@ class ChatRoomTableViewCell: UITableViewCell {
     @IBOutlet weak var partnerDateLabel: UILabel!
     @IBOutlet weak var messegeTextViewWidthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var myMessageTextViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var myDateLabel: UILabel!
     
     override func awakeFromNib() {
@@ -40,10 +42,12 @@ class ChatRoomTableViewCell: UITableViewCell {
         userImageView.layer.cornerRadius = 30
         
         partnerMessageTextView.layer.cornerRadius = 15
+        myMessageTextView.layer.cornerRadius = 15
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        checkWhichUserMessage()
     }
     
     private func checkWhichUserMessage() {
@@ -56,6 +60,14 @@ class ChatRoomTableViewCell: UITableViewCell {
               
               myMessageTextView.isHidden = false
               myDateLabel.isHidden = false
+            
+            if let message = message{
+                myMessageTextView.text = message.message
+                let witdh = estimateFrameForTextView(text: message.message).width + 20
+                messegeTextViewWidthConstraint.constant = witdh
+                myDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
+//                userImageView.image =
+            }
           } else {
               partnerMessageTextView.isHidden = false
               partnerDateLabel.isHidden = false
@@ -63,6 +75,17 @@ class ChatRoomTableViewCell: UITableViewCell {
               
               myMessageTextView.isHidden = true
               myDateLabel.isHidden = true
+            if let urlString = message?.partnerUser?.proFileImageUrl, let url = URL(string: urlString){
+                Nuke.loadImage(with: url, into: userImageView)
+            }
+            
+            if let message = message{
+                partnerMessageTextView.text = message.message
+                let witdh = estimateFrameForTextView(text: message.message).width + 20
+                messegeTextViewWidthConstraint.constant = witdh
+                partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
+//                userImageView.image =
+            }
           }
           
       }
@@ -71,7 +94,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         
-        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)], context: nil)
     }
     
     private func dateFormatterForDateLabel(date: Date) -> String {

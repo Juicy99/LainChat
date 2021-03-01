@@ -11,6 +11,7 @@ import Firebase
 class ChatRoomViewController: UIViewController {
     
     var user: User?
+    var chatroom: ChatRoom?
     
     private let cellId = "cellId"
     private var messages = [Message]()
@@ -58,8 +59,9 @@ class ChatRoomViewController: UIViewController {
                 switch DocumentChange.type{
                 case.added:
                     let dic = DocumentChange.document.data()
-                    let messge = Message(dic: dic)
-                    self.messages.append(messge)
+                    let message = Message(dic: dic)
+                    message.partnerUser = self.
+                    self.messages.append(message)
                     self.ChatRoomTableView.reloadData()
                     print("messge dic: ", dic)
                     
