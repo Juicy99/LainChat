@@ -18,9 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self.window = window
                 window.makeKeyAndVisible()
                 
-                let storybaord = UIStoryboard(name: "ChatList", bundle: nil)
-                let chatListViewController = storybaord.instantiateViewController(identifier: "ChatListViewController")
-        let nav = UINavigationController(rootViewController: chatListViewController)
+                let storybaord = UIStoryboard(name: "Top", bundle: nil)
+                let TopViewController = storybaord.instantiateViewController(identifier: "TopViewController")
+        let nav = UINavigationController(rootViewController: TopViewController)
                 
                 window.rootViewController = nav
         
