@@ -11,10 +11,10 @@ import Nuke
 
 class TopViewController: UIViewController {
     private var user: User?
+    private var chatroom: ChatRoom?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.navigationBar.barTintColor = .black
         
         navigationItem.title = "トーク"
@@ -33,7 +33,42 @@ class TopViewController: UIViewController {
         fetchLoginUserInfo()
     }
     
-    private func fetchLoginUserInfo() {
+    private func fetchChatroomsInfoFromFirestore() {
+            Firestore.firestore().collection("chatRooms").getDocuments { (snapshots, err) in
+                if let err = err {
+                    print("ChatRooms情報の取得に失敗しました。\(err)")
+                    return
+                }
+                
+                snapshots?.documents.forEach({ (snapshot) in
+                    let dic = snapshot.data()
+                    let chatroom = ChatRoom(dic: dic)
+                    
+                    guard let uid = Auth.auth().currentUser?.uid else { return }
+                    chatroom.members.forEach { (memberUid) in
+                        if memberUid != uid {
+                            Firestore.firestore().collection("users").document(memberUid).getDocument { (snaoshot, err) in
+                                if let err = err {
+                                    print("ユーザー情報の取得に失敗しました。\(err)")
+                                    return
+                                }
+                                                            
+                                guard let dic = snaoshot?.data() else { return }
+                                let user = User(dic: dic)
+                                user.uid = snapshot.documentID
+                                
+                                chatroom.partnerUser = user
+                                self.chatroom = chatroom
+                            }
+                            
+                        }
+                    }
+                })
+                
+            }
+            
+        }
+private func fetchLoginUserInfo() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
@@ -50,6 +85,7 @@ class TopViewController: UIViewController {
     }
     
     @IBAction func chatButton(_ sender: UIButton) {
+        fetchChatroomsInfoFromFirestore()
         let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
         let chatRoomViewController = storyboard.instantiateViewController(identifier: "ChatRoomViewController") as! ChatRoomViewController
         
@@ -67,9 +103,9 @@ class TopViewController: UIViewController {
             
             self.dismiss(animated: true, completion: nil)
             print("ChatRoom情報の保存に成功しました。")
-        
-    chatRoomViewController.user = user
-        navigationController?.pushViewController(chatRoomViewController, animated: true)
+            chatRoomViewController.user = user
+            chatRoomViewController.chatroom = chatroom
+            navigationController?.pushViewController(chatRoomViewController, animated: true)
     }
     }
     

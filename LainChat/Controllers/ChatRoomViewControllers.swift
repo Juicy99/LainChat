@@ -24,6 +24,7 @@ class ChatRoomViewController: UIViewController {
         
     }()
     
+    
     @IBOutlet weak var ChatRoomTableView: UITableView!
     
     override func viewDidLoad() {
