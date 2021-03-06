@@ -19,14 +19,14 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerButton.layer.cornerRadius = 12
+        registerButton.layer.cornerRadius = 10
         
         registerButton.addTarget(self, action: #selector(tappedRegisterButton), for:  .touchUpInside)
         
         userNameTextField.delegate = self
         
         registerButton.isEnabled = false
-        registerButton.backgroundColor = .gray
+        registerButton.backgroundColor = .systemGray5
         
         
     }
