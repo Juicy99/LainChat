@@ -7,6 +7,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Sign Up View Controller-->
         <scene sceneID="pSE-6k-6pu">
@@ -16,17 +21,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SignUpImage" id="NBD-33-nOy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="FmW-mo-nIh">
-                                <rect key="frame" x="57" y="429" width="300" height="50"/>
+                                <rect key="frame" x="57" y="319" width="300" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="だれ？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-I1-TVa">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="19"/>
-                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="18"/>
+                                        <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-cj-k5M">
-                                        <rect key="frame" x="0.0" y="19" width="300" height="31"/>
+                                        <rect key="frame" x="0.0" y="18" width="300" height="32"/>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -38,7 +47,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-V3-NBe">
-                                <rect key="frame" x="117" y="509" width="180" height="40"/>
+                                <rect key="frame" x="117" y="399" width="180" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cVQ-Ra-4iK"/>
@@ -56,7 +65,8 @@
                             <constraint firstItem="AbB-V3-NBe" firstAttribute="top" secondItem="FmW-mo-nIh" secondAttribute="bottom" constant="30" id="9Ty-mY-qnC"/>
                             <constraint firstItem="AbB-V3-NBe" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="Fav-f7-Meo"/>
                             <constraint firstItem="FmW-mo-nIh" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="Ig2-G8-98f"/>
-                            <constraint firstItem="FmW-mo-nIh" firstAttribute="centerY" secondItem="MWF-Ar-6XI" secondAttribute="top" constant="410" id="JEV-Mm-inP"/>
+                            <constraint firstItem="FmW-mo-nIh" firstAttribute="centerY" secondItem="MWF-Ar-6XI" secondAttribute="top" constant="300" id="JEV-Mm-inP"/>
+                            <constraint firstItem="FmW-mo-nIh" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="mBF-7z-zbK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -70,6 +80,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SignUpImage" width="585" height="1266"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
