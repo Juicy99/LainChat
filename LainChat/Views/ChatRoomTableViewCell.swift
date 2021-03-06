@@ -7,40 +7,35 @@
 
 import UIKit
 import Firebase
-import Nuke
 
 class ChatRoomTableViewCell: UITableViewCell {
     
-    var message: Message?{
-        didSet{
-//            guard  let text = messegeText else {return}
-//
-////            messageTextView.text = text
-//            if let message = message{
+    var message: Message? {
+        didSet {
+//            if let message = message {
 //                partnerMessageTextView.text = message.message
 //                let witdh = estimateFrameForTextView(text: message.message).width + 20
-//                messegeTextViewWidthConstraint.constant = witdh
+//                messageTextViewWidthConstraint.constant = witdh
+//
 //                partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
-////                userImageView.image =
+//
+//
 //            }
         }
     }
     
     @IBOutlet weak var partnerMessageTextView: UITextView!
-    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var myMessageTextView: UITextView!
     @IBOutlet weak var partnerDateLabel: UILabel!
-    @IBOutlet weak var messegeTextViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myDateLabel: UILabel!
+    @IBOutlet weak var messageTextViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var myMessageTextViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var myDateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         backgroundColor = .clear
-        userImageView.layer.cornerRadius = 30
-        
         partnerMessageTextView.layer.cornerRadius = 15
         myMessageTextView.layer.cornerRadius = 15
     }
@@ -51,44 +46,38 @@ class ChatRoomTableViewCell: UITableViewCell {
     }
     
     private func checkWhichUserMessage() {
-          guard let uid = Auth.auth().currentUser?.uid else { return }
-          
-          if uid == message?.uid {
-              partnerMessageTextView.isHidden = true
-              partnerDateLabel.isHidden = true
-              userImageView.isHidden = true
-              
-              myMessageTextView.isHidden = false
-              myDateLabel.isHidden = false
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        if uid == message?.uid {
+            partnerMessageTextView.isHidden = true
+            partnerDateLabel.isHidden = true
             
-            if let message = message{
+            myMessageTextView.isHidden = false
+            myDateLabel.isHidden = false
+            
+            if let message = message {
                 myMessageTextView.text = message.message
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
-                messegeTextViewWidthConstraint.constant = witdh
+                myMessageTextViewWidthConstraint.constant = witdh
+                
                 myDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
-//                userImageView.image =
             }
-          } else {
-              partnerMessageTextView.isHidden = false
-              partnerDateLabel.isHidden = false
-              userImageView.isHidden = false
-              
-              myMessageTextView.isHidden = true
-              myDateLabel.isHidden = true
-            if let urlString = message?.partnerUser?.profileImageUrl, let url = URL(string: urlString){
-                Nuke.loadImage(with: url, into: userImageView)
-            }
+        } else {
+            partnerMessageTextView.isHidden = false
+            partnerDateLabel.isHidden = false
+            myMessageTextView.isHidden = true
+            myDateLabel.isHidden = true
             
-            if let message = message{
+            if let message = message {
                 partnerMessageTextView.text = message.message
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
-                messegeTextViewWidthConstraint.constant = witdh
+                messageTextViewWidthConstraint.constant = witdh
+                
                 partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
-//                userImageView.image =
             }
-          }
-          
-      }
+        }
+        
+    }
     
     private func estimateFrameForTextView(text: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)

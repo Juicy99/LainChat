@@ -28,6 +28,7 @@
 		9035663325DDC06E00513BDD /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9035663225DDC06E00513BDD /* ChatList.storyboard */; };
 		9035663B25DDC1A700513BDD /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035663A25DDC1A700513BDD /* ChatListViewController.swift */; };
 		9069501E25E855FF001B0D39 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9069501D25E855FF001B0D39 /* User.swift */; };
+		90A6F5C625F3524800B4CBFA /* MyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6F5C525F3524800B4CBFA /* MyStyle.swift */; };
 		90CE789925E2727000F6B1E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90CE789825E2727000F6B1E3 /* GoogleService-Info.plist */; };
 		90E295A325EAEA2D003E0BF4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E295A225EAEA2D003E0BF4 /* Message.swift */; };
 		9548B3A51633BA36395C5D7E /* Pods_LainChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6989FA8D6E2D76E373373C19 /* Pods_LainChatTests.framework */; };
@@ -82,6 +83,7 @@
 		9035663225DDC06E00513BDD /* ChatList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
 		9035663A25DDC1A700513BDD /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		9069501D25E855FF001B0D39 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		90A6F5C525F3524800B4CBFA /* MyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyle.swift; sourceTree = "<group>"; };
 		90C5E53DDA90147E78011B87 /* Pods-LainChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LainChatTests.debug.xcconfig"; path = "Target Support Files/Pods-LainChatTests/Pods-LainChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		90CE789825E2727000F6B1E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		90E295A225EAEA2D003E0BF4 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				9021174025E149B800557E05 /* StoryBoards */,
 				9021173F25E1498100557E05 /* Controllers */,
 				903565FF25DDBFDA00513BDD /* AppDelegate.swift */,
+				90A6F5C525F3524800B4CBFA /* MyStyle.swift */,
 				9035660125DDBFDA00513BDD /* SceneDelegate.swift */,
 				9035660825DDBFDA00513BDD /* Assets.xcassets */,
 				9035660A25DDBFDA00513BDD /* LaunchScreen.storyboard */,
@@ -505,6 +508,7 @@
 				9021176F25E21C8200557E05 /* ChatInputAccessoryView.swift in Sources */,
 				9021174A25E1554C00557E05 /* ChatRoomViewControllers.swift in Sources */,
 				9029147225F03240002666B4 /* ChatRoom.swift in Sources */,
+				90A6F5C625F3524800B4CBFA /* MyStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

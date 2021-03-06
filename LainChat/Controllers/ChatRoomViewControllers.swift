@@ -11,10 +11,15 @@ import Firebase
 class ChatRoomViewController: UIViewController {
     
     var user: User?
-    var chatroom: ChatRoom?
     
     private let cellId = "cellId"
     private var messages = [Message]()
+    private let accessoryHeight: CGFloat = 100
+    private let tableViewContentinset: UIEdgeInsets = .init(top: 70, left: 0, bottom: 0, right: 0)
+    private let tableViewIndicatorInset: UIEdgeInsets = .init(top: 70, left: 0, bottom: 0, right: 0)
+    private var safeAreaBottom: CGFloat{
+        self.view.safeAreaInsets.bottom
+    }
     
     private lazy var chatInputAccessoryView: ChatInputAccessoryView = {
         let view = ChatInputAccessoryView()
@@ -25,18 +30,60 @@ class ChatRoomViewController: UIViewController {
     }()
     
     
-    @IBOutlet weak var ChatRoomTableView: UITableView!
+    @IBOutlet weak var chatRoomTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ChatRoomTableView.backgroundColor = .white
-        
-        ChatRoomTableView.delegate = self
-        ChatRoomTableView.dataSource = self
-        ChatRoomTableView.register(UINib(nibName: "ChatRoomTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
-        ChatRoomTableView.backgroundColor = .black
+        setupNotification()
+        setupChatRoomTableView()
         fetchMessages()
+    }
+    
+    private func setupNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupChatRoomTableView(){
+        
+        chatRoomTableView.backgroundColor = .white
+        
+        chatRoomTableView.delegate = self
+        chatRoomTableView.dataSource = self
+        chatRoomTableView.register(UINib(nibName: "ChatRoomTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
+        chatRoomTableView.backgroundColor = .black
+        chatRoomTableView.contentInset = tableViewContentinset
+        chatRoomTableView.scrollIndicatorInsets = tableViewIndicatorInset
+        chatRoomTableView.keyboardDismissMode = .interactive
+        chatRoomTableView.transform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: 0)
+        
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        print("keboa")
+       guard let userInfo = notification.userInfo else { return }
+        
+        if let keyboradFrame = (userInfo[ UIResponder.keyboardFrameEndUserInfoKey ] as AnyObject).cgRectValue{
+            
+            if keyboradFrame.height <= accessoryHeight { return }
+            
+            let top = keyboradFrame.height - safeAreaBottom
+            var moveY = -(top - chatRoomTableView.contentOffset.y)
+            if chatRoomTableView.contentOffset.y != -70 { moveY += 70 }
+            let contentInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
+        
+            chatRoomTableView.contentInset = contentInset
+            chatRoomTableView.scrollIndicatorInsets = contentInset
+            chatRoomTableView.contentOffset = CGPoint(x: 0, y: moveY)
+            
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(){
+        print("keboasss")
+        chatRoomTableView.contentInset = tableViewIndicatorInset
+        chatRoomTableView.scrollIndicatorInsets = tableViewIndicatorInset
     }
     
     override var inputAccessoryView: UIView?{
@@ -61,11 +108,14 @@ class ChatRoomViewController: UIViewController {
                 case.added:
                     let dic = DocumentChange.document.data()
                     let message = Message(dic: dic)
-                    message.partnerUser = self.chatroom?.partnerUser
-                    
                     self.messages.append(message)
-                    self.ChatRoomTableView.reloadData()
-                    print("messge dic: ", dic)
+                    self.messages.sort { (m1, m2) -> Bool in
+                        let m1Date = m1.createdAt.dateValue()
+                        let m2Date = m2.createdAt.dateValue()
+                        return m1Date > m2Date
+                    }
+                    self.chatRoomTableView.reloadData()
+//                    self.chatRoomTableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
                     
                 case . modified, .removed:
                     print("nothing to do ")
@@ -80,7 +130,11 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
     
     
     func tappedSendButton(text: String) {
-        
+        addMessageToFirestore(text: text)
+
+    }
+    
+    private func addMessageToFirestore(text: String){
         guard let name = user?.username else {return}
         guard let uid = Auth.auth().currentUser?.uid else { return}
         chatInputAccessoryView.removetext()
@@ -102,12 +156,13 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
             
         }
     }
+    
 }
 
 extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        ChatRoomTableView.estimatedRowHeight = 20
+        chatRoomTableView.estimatedRowHeight = 20
         return UITableView.automaticDimension
     }
     
@@ -116,10 +171,11 @@ extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ChatRoomTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as!
+        let cell = chatRoomTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as!
         ChatRoomTableViewCell
 //        cell.messageTextView.text = messgaes[indexPath.row]
         cell.message = messages[indexPath.row]
+        cell.transform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: 0)
     return cell
     }
 }

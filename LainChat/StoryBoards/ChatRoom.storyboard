@@ -48,7 +48,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ded-ha-yKc"/>
                     <connections>
-                        <outlet property="ChatRoomTableView" destination="eNg-IL-4bQ" id="khR-kf-86r"/>
+                        <outlet property="chatRoomTableView" destination="eNg-IL-4bQ" id="khR-kf-86r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02n-Pc-xU9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

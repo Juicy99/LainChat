@@ -16,31 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wG-69-DEL">
-                                <rect key="frame" x="122" y="214" width="170" height="170"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="8wG-69-DEL" secondAttribute="height" multiplier="1:1" id="m3y-Oe-f5r"/>
-                                    <constraint firstAttribute="width" constant="170" id="nXs-0S-Cdg"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="プロフィール画像">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="tappedProfileImageButton:" destination="XcK-64-cIT" eventType="touchUpInside" id="Mqs-7w-7Uj"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="FmW-mo-nIh">
                                 <rect key="frame" x="57" y="454" width="300" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-I1-TVa">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="だれ？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-I1-TVa">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="19"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザーの名前" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-cj-k5M">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-cj-k5M">
                                         <rect key="frame" x="0.0" y="19" width="300" height="31"/>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -60,7 +45,7 @@
                                     <constraint firstAttribute="width" constant="180" id="ruk-vD-LVn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Rgester">
+                                <state key="normal" title="Enter ID">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
@@ -68,16 +53,13 @@
                         <viewLayoutGuide key="safeArea" id="MWF-Ar-6XI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FmW-mo-nIh" firstAttribute="top" secondItem="8wG-69-DEL" secondAttribute="bottom" constant="70" id="1s3-KR-pt5"/>
                             <constraint firstItem="AbB-V3-NBe" firstAttribute="top" secondItem="FmW-mo-nIh" secondAttribute="bottom" constant="30" id="9Ty-mY-qnC"/>
-                            <constraint firstItem="8wG-69-DEL" firstAttribute="top" secondItem="MWF-Ar-6XI" secondAttribute="top" constant="170" id="Cyu-wa-RqB"/>
                             <constraint firstItem="AbB-V3-NBe" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="Fav-f7-Meo"/>
                             <constraint firstItem="FmW-mo-nIh" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="Ig2-G8-98f"/>
-                            <constraint firstItem="8wG-69-DEL" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="YOr-2h-XoR"/>
+                            <constraint firstItem="FmW-mo-nIh" firstAttribute="top" secondItem="MWF-Ar-6XI" secondAttribute="top" constant="410" id="JEV-Mm-inP"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="profileImageButton" destination="8wG-69-DEL" id="LPG-jg-OVJ"/>
                         <outlet property="registerButton" destination="AbB-V3-NBe" id="RTQ-8v-XVB"/>
                         <outlet property="userNameTextField" destination="QNz-cj-k5M" id="IGI-u5-96t"/>
                     </connections>

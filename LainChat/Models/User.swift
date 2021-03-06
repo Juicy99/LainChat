@@ -13,7 +13,6 @@ class User {
     let email: String
     let username: String
     let createdAt: Timestamp
-    let profileImageUrl: String
     
     var uid: String?
     
@@ -22,7 +21,6 @@ class User {
         self.email = dic["email"] as? String ?? ""
         self.username = dic["username"] as? String ?? ""
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
-        self.profileImageUrl = dic["proFileImageUrl"] as? String ?? ""
     }
     
     
