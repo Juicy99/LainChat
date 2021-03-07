@@ -34,6 +34,12 @@ class ChatRoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let image = UIImage(named: "ChatImage.jpg")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.chatRoomTableView.frame.width, height: self.chatRoomTableView.frame.height))
+        imageView.image = image
+        self.chatRoomTableView.backgroundView = imageView
+        
         setupNotification()
         setupChatRoomTableView()
         fetchMessages()
