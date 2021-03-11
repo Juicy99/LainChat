@@ -26,7 +26,7 @@ class SignUpViewController: UIViewController {
         userNameTextField.delegate = self
         
         registerButton.isEnabled = false
-        registerButton.backgroundColor = .systemGray5
+        registerButton.backgroundColor = .gray
         
         
     }
@@ -88,7 +88,7 @@ extension SignUpViewController: UITextFieldDelegate {
             registerButton.backgroundColor = .gray
         } else{
             registerButton.isEnabled = true
-            registerButton.backgroundColor = .black
+            registerButton.backgroundColor = .systemGray5
         }
     }
 }

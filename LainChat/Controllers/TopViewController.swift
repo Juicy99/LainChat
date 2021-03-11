@@ -17,8 +17,8 @@ class TopViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = .black
         
-        navigationItem.title = "トーク"
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.title = "ようこそワイヤードへ"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.systemBlue]
         
         if Auth.auth().currentUser?.uid == nil {
             let storyboar = UIStoryboard(name: "SignUp", bundle: nil)
@@ -47,27 +47,12 @@ class TopViewController: UIViewController {
         imageListArray.append(image5)
         imageListArray.append(image6)
         
-               // 画面スクリーンサイズ
-               let screenWidth = self.view.bounds.width
-               let screenHeight = self.view.bounds.height
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+
+        // スクリーンサイズにあわせてimageViewの配置
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         
-               // 画像のサイズ
-               let imageWidth = image1.size.width
-               let imageHeight = image1.size.height
-        
-               // UIImageView のインスタンス生成,ダミーでimage1を指定
-               let imageView:UIImageView = UIImageView(image:image1)
-               
-               // 画像サイズからImageViewの大きさを設定していく
-               let rect = CGRect(x:0,
-                                 y:0,
-                                 width:imageWidth,
-                                 height:imageHeight )
-               
-               imageView.frame = rect
-               
-               // 画像が画面中央にくるように位置合わせ
-               imageView.center = CGPoint(x:screenWidth/2, y:screenHeight/2)
         
                // view に追加する
         
@@ -86,11 +71,6 @@ class TopViewController: UIViewController {
                imageView.startAnimating()
         
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchLoginUserInfo()
     }
     
     

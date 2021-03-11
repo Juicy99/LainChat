@@ -1,14 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "Blood.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Blood-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Blood-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
