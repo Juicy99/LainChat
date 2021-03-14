@@ -11,8 +11,8 @@ import Nuke
 
 class TopViewController: UIViewController {
     private var user: User?
+    private var chatroom: ChatRoom?
     
-    @IBOutlet weak var image: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = .black
@@ -26,8 +26,6 @@ class TopViewController: UIViewController {
             SignUpViewController.modalPresentationStyle = .fullScreen
             self.present(SignUpViewController, animated: true, completion: nil)
         }
-        
-        
         
         let image1 = UIImage(named:"laintop0")!
                let image2 = UIImage(named:"laintop1")!
@@ -69,11 +67,12 @@ class TopViewController: UIViewController {
                
                // アニメーションを開始
                imageView.startAnimating()
-        
-        
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchLoginUserInfo()
+    }
 private func fetchLoginUserInfo() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
