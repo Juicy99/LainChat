@@ -7,11 +7,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="TimesNewRoman.ttf">
-            <string>.SFUI-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Sign Up View Controller-->
         <scene sceneID="pSE-6k-6pu">
@@ -21,23 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SignUpImage" id="NBD-33-nOy">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mxE-9X-wxN">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wG-69-DEL">
+                                <rect key="frame" x="122" y="214" width="170" height="170"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8wG-69-DEL" secondAttribute="height" multiplier="1:1" id="m3y-Oe-f5r"/>
+                                    <constraint firstAttribute="width" constant="170" id="nXs-0S-Cdg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="プロフィール画像">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedProfileImageButton:" destination="XcK-64-cIT" eventType="touchUpInside" id="Mqs-7w-7Uj"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="FmW-mo-nIh">
-                                <rect key="frame" x="57" y="319" width="300" height="50"/>
+                                <rect key="frame" x="57" y="454" width="300" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="だれ？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-I1-TVa">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="18"/>
-                                        <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-cj-k5M">
-                                        <rect key="frame" x="0.0" y="18" width="300" height="32"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="だれ？" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-cj-k5M">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
@@ -47,29 +50,36 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-V3-NBe">
-                                <rect key="frame" x="117" y="399" width="180" height="40"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <rect key="frame" x="117" y="534" width="180" height="40"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cVQ-Ra-4iK"/>
                                     <constraint firstAttribute="width" constant="180" id="ruk-vD-LVn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Enter ID">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MWF-Ar-6XI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="FmW-mo-nIh" firstAttribute="top" secondItem="8wG-69-DEL" secondAttribute="bottom" constant="70" id="1s3-KR-pt5"/>
                             <constraint firstItem="AbB-V3-NBe" firstAttribute="top" secondItem="FmW-mo-nIh" secondAttribute="bottom" constant="30" id="9Ty-mY-qnC"/>
+                            <constraint firstItem="8wG-69-DEL" firstAttribute="top" secondItem="MWF-Ar-6XI" secondAttribute="top" constant="170" id="Cyu-wa-RqB"/>
                             <constraint firstItem="AbB-V3-NBe" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="Fav-f7-Meo"/>
+                            <constraint firstItem="MWF-Ar-6XI" firstAttribute="trailing" secondItem="mxE-9X-wxN" secondAttribute="trailing" id="Gkf-i7-xfJ"/>
                             <constraint firstItem="FmW-mo-nIh" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="Ig2-G8-98f"/>
-                            <constraint firstItem="FmW-mo-nIh" firstAttribute="centerY" secondItem="MWF-Ar-6XI" secondAttribute="top" constant="300" id="JEV-Mm-inP"/>
-                            <constraint firstItem="FmW-mo-nIh" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="mBF-7z-zbK"/>
+                            <constraint firstItem="8wG-69-DEL" firstAttribute="centerX" secondItem="F7U-FC-QTR" secondAttribute="centerX" id="YOr-2h-XoR"/>
+                            <constraint firstItem="mxE-9X-wxN" firstAttribute="leading" secondItem="F7U-FC-QTR" secondAttribute="leading" id="a8p-ph-Asy"/>
+                            <constraint firstItem="mxE-9X-wxN" firstAttribute="top" secondItem="MWF-Ar-6XI" secondAttribute="top" id="nr8-aR-QDG"/>
+                            <constraint firstAttribute="bottom" secondItem="mxE-9X-wxN" secondAttribute="bottom" id="qS3-XM-wjt"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundImage" destination="mxE-9X-wxN" id="0D7-Ln-Del"/>
+                        <outlet property="profileImageButton" destination="8wG-69-DEL" id="LPG-jg-OVJ"/>
                         <outlet property="registerButton" destination="AbB-V3-NBe" id="RTQ-8v-XVB"/>
                         <outlet property="userNameTextField" destination="QNz-cj-k5M" id="IGI-u5-96t"/>
                     </connections>
@@ -80,12 +90,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SignUpImage" width="585" height="1266"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
