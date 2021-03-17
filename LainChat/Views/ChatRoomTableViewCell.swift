@@ -7,6 +7,9 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
+import FirebaseUI
+import Nuke
 
 class ChatRoomTableViewCell: UITableViewCell {
     
@@ -25,6 +28,7 @@ class ChatRoomTableViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var partnerMessageTextView: UITextView!
+    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var myMessageTextView: UITextView!
     @IBOutlet weak var partnerDateLabel: UILabel!
     @IBOutlet weak var myDateLabel: UILabel!
@@ -36,9 +40,15 @@ class ChatRoomTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = .clear
+        userImageView.layer.cornerRadius = 30
         partnerMessageTextView.layer.cornerRadius = 15
         myMessageTextView.layer.cornerRadius = 15
     }
+    let imageSample = UIImageView()
+
+    
+    
+
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -51,6 +61,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         if uid == message?.uid {
             partnerMessageTextView.isHidden = true
             partnerDateLabel.isHidden = true
+            userImageView.isHidden = true
             
             myMessageTextView.isHidden = false
             myDateLabel.isHidden = false
@@ -65,19 +76,35 @@ class ChatRoomTableViewCell: UITableViewCell {
         } else {
             partnerMessageTextView.isHidden = false
             partnerDateLabel.isHidden = false
+            userImageView.isHidden = false
             myMessageTextView.isHidden = true
             myDateLabel.isHidden = true
-            
+            }
+        
+        if let urlString = message?.profileImageUrl, let url = URL(string: urlString) {
+                        Nuke.loadImage(with: url, into: userImageView)
+                    }
+        
             if let message = message {
                 partnerMessageTextView.text = message.message
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
                 messageTextViewWidthConstraint.constant = witdh
-                
                 partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
-            }
         }
         
     }
+    
+    private func addBackground(name: String) {
+        
+        imageSample.image = UIImage(named: name)
+         
+        // 画像を読み込んで、準備しておいたimageSampleに設定
+        imageSample.image = UIImage(named: name)
+         
+        // 設定した画像をスクリーンに表示する
+        self.userImageView.addSubview(imageSample)
+
+        }
     
     private func estimateFrameForTextView(text: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)

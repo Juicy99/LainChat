@@ -40,7 +40,9 @@
                                     <constraint firstAttribute="width" constant="160" id="wyI-5F-RBW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="chatButton:" destination="9ki-ob-EcP" eventType="touchUpInside" id="OoO-D5-drT"/>
                                 </connections>

@@ -65,67 +65,75 @@ let imagePickerController = UIImagePickerController()
             // 加えたsubviewを、最背面に設置する
         self.backgroundImage.sendSubviewToBack(imageViewBackground)
         }
-    
     @objc private func tappedRegisterButton() {
-        let image = profileImageButton.imageView?.image ?? UIImage(named: "vince_carter")
-        guard let uploadImage = image?.jpegData(compressionQuality: 0.3) else { return }
-        
         progress.show(message: "頑張ってます・・",style: MyStyle())
         
-        let fileName = NSUUID().uuidString
-        let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
-        
-        storageRef.putData(uploadImage, metadata: nil) { [self] (matadata, err) in
+        Auth.auth().signInAnonymously() { (authResult, err) in
             if let err = err {
-                print("Firestorageへの情報の保存に失敗しました。\(err)")
-                self.progress.show(message: "頑張ってます・・",style: MyStyle())
+                print("認証情報の保存に失敗しました。\(err)")
                 return
             }
-            
-            storageRef.downloadURL { (url, err) in
-                if let err = err {
-                    print("Firestorageからのダウンロードに失敗しました。\(err)")
-                    progress.show(message: "頑張ってます・・",style: MyStyle())
-                    return
-                }
-                
-                guard let urlString = url?.absoluteString else { return }
-                self.createUserToFirestore(proFileImageUrl: urlString)
-            }
-            
-        }
+
+            guard let user = authResult?.user else { return } // true
         
-    }
-
-    private func createUserToFirestore(proFileImageUrl: String) {
-    Auth.auth().signInAnonymously() { (authResult, err) in
-        if let err = err {
-            print("認証情報の保存に失敗しました。\(err)")
-            return
-        }
-
-        guard let user = authResult?.user else { return } // true
-        let uid = user.uid
-        guard let username = self.userNameTextField.text else { return }
-        let docData = [
-            "username": username,
-            "createdAt": Timestamp(),
-            "proFileImageUrl": proFileImageUrl
-            ] as [String : Any]
-        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
-            if let err = err {
-                print("Firestoreへの保存に失敗しました。\(err)")
-                return
-            }
-            
-            print("Firestoreへの情報の保存が成功しました。")
-            self.dismiss(animated: true, completion: nil)
-            
-        }
+            guard let image = self.profileImageButton.imageView?.image else {return}
+           guard let uploadimage = image.jpegData(compressionQuality: 0.01) else {return}
+           
+           let fileName = user.uid
+           let storegeRef = Storage.storage().reference().child("profile_image").child(fileName)
+            let meta = StorageMetadata()
+            meta.contentType = "image/jpeg"
+           
+           storegeRef.putData(uploadimage, metadata: meta){(metadata,err) in
+           if let err = err {
+               print("FireStorageへの情報の保存に失敗しました。\(err)")
                return
            }
-        
+               storegeRef.downloadURL{ (url, err) in
+                   if let err = err {
+                       print("FireStoreからのダウンロードに失敗しました。 \(err)")
+                       return
+                   }
+                   
+                   guard let urlString = url?.absoluteString else { return }
+                   self.createUserToFirestore(proFileImageUrl: urlString)
+               }
+    
+           }
+       }
     }
+
+       private func createUserToFirestore(proFileImageUrl: String) {
+       Auth.auth().signInAnonymously() { (authResult, err) in
+           if let err = err {
+               print("認証情報の保存に失敗しました。\(err)")
+               return
+           }
+
+           guard let user = authResult?.user else { return } // true
+           let uid = user.uid
+           guard let username = self.userNameTextField.text else { return }
+           let docData = [
+               "username": username,
+               "createdAt": Timestamp(),
+               "proFileImageUrl": proFileImageUrl
+               ] as [String : Any]
+           Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+               if let err = err {
+                   print("Firestoreへの保存に失敗しました。\(err)")
+                   return
+               }
+               
+               print("Firestoreへの情報の保存が成功しました。")
+               self.dismiss(animated: true, completion: nil)
+               
+           }
+                  return
+              }
+           
+       }
+       
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

@@ -132,6 +132,8 @@ class ChatRoomViewController: UIViewController {
     
 }
 
+
+
 extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
     
     
@@ -142,6 +144,7 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
     
     private func addMessageToFirestore(text: String){
         guard let name = user?.username else {return}
+        guard let image = user?.profileImageUrl else {return}
         guard let uid = Auth.auth().currentUser?.uid else { return}
         chatInputAccessoryView.removetext()
         
@@ -150,7 +153,8 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
             "name": name,
             "createdAt": Timestamp(),
             "uid": uid,
-            "message": text
+            "message": text,
+            "proFileImageUrl": image
         ] as [String : Any]
         
         Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
