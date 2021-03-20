@@ -13,6 +13,7 @@ class TopViewController: UIViewController {
     private var user: User?
     private var chatroom: ChatRoom?
     
+    @IBOutlet weak var playButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barTintColor = .black
@@ -25,7 +26,16 @@ class TopViewController: UIViewController {
             let   SignUpViewController = storyboar.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
             SignUpViewController.modalPresentationStyle = .fullScreen
             self.present(SignUpViewController, animated: true, completion: nil)
+            
         }
+        self.playButton.frame = CGRect(x: (self.view.frame.size.width / 2) - 150, y: (self.view.frame.size.height / 2) - 50, width: 300, height: 100)
+         
+            let picture = UIImage(named: "Play")
+             
+            self.playButton.setImage(picture, for: .normal)
+            self.view.addSubview(playButton)
+        
+        
         
         let image1 = UIImage(named:"laintop0")!
                let image2 = UIImage(named:"laintop1")!
@@ -68,6 +78,8 @@ class TopViewController: UIViewController {
                // アニメーションを開始
                imageView.startAnimating()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,4 +124,30 @@ private func fetchLoginUserInfo() {
     }
     }
     
+}
+class RippleButton: UIButton {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        drawRipple(touch: touches.first!)
+    }
+    private func drawRipple(touch: UITouch) {
+        let rippleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        rippleView.layer.cornerRadius = 100
+        rippleView.center = touch.location(in: self)
+        rippleView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        rippleView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.4)
+        addSubview(rippleView)
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: UIView.AnimationOptions.curveEaseIn,
+            animations: {
+                rippleView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                rippleView.backgroundColor = .clear
+            },
+            completion: { (finished: Bool) in
+                rippleView.removeFromSuperview()
+            }
+        )
+    }
 }

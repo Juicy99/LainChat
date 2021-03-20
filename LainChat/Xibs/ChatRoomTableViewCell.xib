@@ -51,7 +51,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="メッセージがここに入ります" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
-                        <rect key="frame" x="163" y="0.0" width="250" height="88"/>
+                        <rect key="frame" x="163" y="0.0" width="250" height="93"/>
                         <color key="backgroundColor" red="0.0" green="0.11965720775339589" blue="0.44164787371134018" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="250" id="LEa-Gz-crV"/>
@@ -74,7 +74,7 @@
                     <constraint firstItem="gwf-Ug-zGi" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" id="mHR-aF-sUT"/>
                     <constraint firstItem="gwf-Ug-zGi" firstAttribute="leading" secondItem="XrL-kt-3AL" secondAttribute="trailing" constant="10" id="oNf-qT-VH0"/>
                     <constraint firstItem="Don-vp-Hvc" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" id="skD-gz-Nhd"/>
-                    <constraint firstAttribute="bottom" secondItem="Don-vp-Hvc" secondAttribute="bottom" constant="55" id="to9-co-AOw"/>
+                    <constraint firstAttribute="bottom" secondItem="Don-vp-Hvc" secondAttribute="bottom" constant="50" id="to9-co-AOw"/>
                     <constraint firstAttribute="trailing" secondItem="Don-vp-Hvc" secondAttribute="trailing" constant="20" id="uhM-c5-f3O"/>
                 </constraints>
             </tableViewCellContentView>

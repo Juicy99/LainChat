@@ -32,16 +32,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gge-7v-o1m">
-                                <rect key="frame" x="127" y="448" width="160" height="40"/>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gge-7v-o1m" customClass="RippleButton" customModule="LainChat" customModuleProvider="target">
+                                <rect key="frame" x="127" y="448" width="160" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.11965720775339589" blue="0.44164787371134018" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="I2y-Zr-70F"/>
+                                    <constraint firstAttribute="height" constant="80" id="I2y-Zr-70F"/>
                                     <constraint firstAttribute="width" constant="160" id="wyI-5F-RBW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Play">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
                                     <action selector="chatButton:" destination="9ki-ob-EcP" eventType="touchUpInside" id="OoO-D5-drT"/>
@@ -56,6 +55,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8Cp-rB-qgH"/>
+                    <connections>
+                        <outlet property="playButton" destination="gge-7v-o1m" id="ER5-f5-NhF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhd-Eh-Bn7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -63,11 +65,11 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
