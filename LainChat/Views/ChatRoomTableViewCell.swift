@@ -27,6 +27,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var partnerName: UILabel!
     @IBOutlet weak var partnerMessageTextView: UITextView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var myMessageTextView: UITextView!
@@ -62,6 +63,7 @@ class ChatRoomTableViewCell: UITableViewCell {
             partnerMessageTextView.isHidden = true
             partnerDateLabel.isHidden = true
             userImageView.isHidden = true
+            partnerName.isHidden = true
             
             myMessageTextView.isHidden = false
             myDateLabel.isHidden = false
@@ -77,6 +79,7 @@ class ChatRoomTableViewCell: UITableViewCell {
             partnerMessageTextView.isHidden = false
             partnerDateLabel.isHidden = false
             userImageView.isHidden = false
+            partnerName.isHidden = false
             myMessageTextView.isHidden = true
             myDateLabel.isHidden = true
             }
@@ -86,6 +89,7 @@ class ChatRoomTableViewCell: UITableViewCell {
                     }
         
             if let message = message {
+                partnerName.text = message.name
                 partnerMessageTextView.text = message.message
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
                 messageTextViewWidthConstraint.constant = witdh
