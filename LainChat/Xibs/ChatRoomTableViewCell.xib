@@ -50,7 +50,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="メッセージがここに入ります" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
+                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="メッセージがここに入ります" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
                         <rect key="frame" x="163" y="0.0" width="250" height="93"/>
                         <color key="backgroundColor" red="0.0" green="0.11965720775339589" blue="0.44164787371134018" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>

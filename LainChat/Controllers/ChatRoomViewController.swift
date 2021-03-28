@@ -4,11 +4,18 @@
 //
 //  Created by Juicy99 on 2021/02/20.
 //
+//
+//  ChatRoomViewControllers.swift
+//  LainChat
+//
+//  Created by Juicy99 on 2021/02/20.
+//
 
 import UIKit
 import Firebase
+import ContextMenuSwift
 
-class ChatRoomViewController: UIViewController {
+class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var user: User?
     
@@ -43,6 +50,15 @@ class ChatRoomViewController: UIViewController {
         setupNotification()
         setupChatRoomTableView()
         fetchMessages()
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self,
+                                                               action: #selector(ChatRoomViewController.cellLongPressed(_ :)))
+
+        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
+        longPressRecognizer.delegate = self
+
+        // tableViewにrecognizerを設定
+        
+        chatRoomTableView.addGestureRecognizer(longPressRecognizer)
     }
     
     private func setupNotification(){
@@ -188,4 +204,93 @@ extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {
         cell.transform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: 0)
     return cell
     }
+    
+    /// セルが長押しした際に呼ばれるメソッド
+    @objc func cellLongPressed(_ recognizer: UILongPressGestureRecognizer) {
+
+        // 押された位置でcellのPathを取得
+        let point = recognizer.location(in: chatRoomTableView)
+        // 押された位置に対応するindexPath
+        let indexPath = chatRoomTableView.indexPathForRow(at: point)
+            
+        if indexPath == nil {  //indexPathがなかったら
+                
+            return  //すぐに返り、後の処理はしない
+                
+        } else if recognizer.state == UIGestureRecognizer.State.began  {
+            // 長押しされた場合の処理
+                
+            //コンテキストメニューの内容を作成します
+            let edit = ContextMenuItemWithImage(title: "編集", image: UIImage(systemName: "square.and.pencil")!)
+            let delete = ContextMenuItemWithImage(title: "削除", image: UIImage(systemName: "trash")!)
+                
+         //コンテキストメニューに表示するアイテムを決定します
+            CM.items = [edit, delete]
+        //表示します
+            CM.showMenu(viewTargeted: chatRoomTableView.cellForRow(at: indexPath!)!,
+                        delegate: self,
+                        animated: true)
+                
+        }
+    }
+}
+extension ChatRoomViewController: ContextMenuDelegate {
+    
+    /**
+        コンテキストメニューの選択肢が選択された時に実行される
+        - Parameters:
+            - contextMenu: そのコンテキストメニューだと思われる
+            - cell: **選択されたコンテキストメニューの**セル
+            - targetView: コンテキストメニューの発生源のビュー
+            - item: 選択されたコンテキストのアイテム(タイトルとか画像とかが入ってる)
+            - index: **選択されたコンテキストのアイテムの**座標
+        - Returns: よくわからない(多分成功したらtrue...?)
+     */
+    func contextMenuDidSelect(_ contextMenu: ContextMenu,
+                              cell: ContextMenuCell,
+                              targetedView: UIView,
+                              didSelect item: ContextMenuItem,
+                              forRowAt index: Int) -> Bool {
+        
+        print("コンテキストメニューの", index, "番目のセルが選択された！")
+    print("そのセルには", item.title, "というテキストが書いてあるよ!")
+        
+        //サンプルではtrueを返していたのでとりあえずtrueを返してみる
+        return true
+        
+    }
+    
+    /**
+        コンテキストメニューの選択肢が選択された時に実行される
+        - Parameters:
+            - contextMenu: そのコンテキストメニューだと思われる
+            - cell: **選択されたコンテキストメニューの**セル
+            - targetView: コンテキストメニューの発生源のビュー
+            - item: 選択されたコンテキストのアイテム(タイトルとか画像とかが入ってる)
+            - index: **選択されたコンテキストのアイテムの**座標
+     こちらは値を返さない方
+      (値を返す方との違いがよくわからないが、サンプルでは返す方を使っていたのでそちらを使うことを推奨)
+     */
+    func contextMenuDidDeselect(_ contextMenu: ContextMenu,
+                                cell: ContextMenuCell,
+                                targetedView: UIView,
+                                didSelect item: ContextMenuItem,
+                                forRowAt index: Int) {
+    }
+    
+    /**
+     コンテキストメニューが表示されたら呼ばれる
+     */
+    func contextMenuDidAppear(_ contextMenu: ContextMenu) {
+        print("コンテキストメニューが表示された!")
+    }
+    
+    /**
+     コンテキストメニューが消えたら呼ばれる
+     */
+    func contextMenuDidDisappear(_ contextMenu: ContextMenu) {
+        print("コンテキストメニューが消えた!")
+    }
+    
+    
 }
