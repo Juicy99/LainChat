@@ -251,11 +251,30 @@ extension ChatRoomViewController: ContextMenuDelegate {
                               targetedView: UIView,
                               didSelect item: ContextMenuItem,
                               forRowAt index: Int) -> Bool {
+        //長押しされたセルを、型を再指定して読み込むことができます
+        let pressedTableCell = targetedView as! ChatRoomTableViewCell
         
-        print("コンテキストメニューの", index, "番目のセルが選択された！")
-    print("そのセルには", item.title, "というテキストが書いてあるよ!")
+        //選択されたコンテキストメニューのアイテム => item
+        print("選択されたメニューのタイトル: ", item.title)
         
-        //サンプルではtrueを返していたのでとりあえずtrueを返してみる
+        
+        //選択されたメニューのindexで条件分岐させたい場合
+        switch index {
+        case 0:
+            //0番目のセル(1番上のメニューがタップされると実行されます)
+            //この例では編集メニューに設定してあります
+            print("編集が押された!")
+        
+        case 1:
+            //同様です
+            print("削除が押された!")
+        
+        default:
+            //ここはその他のセルがタップされた際に実行されます
+            break
+        }
+        
+        //最後にbool値を返します
         return true
         
     }
