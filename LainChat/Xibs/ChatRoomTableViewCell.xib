@@ -79,6 +79,9 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="partnerDropDownTapped:" destination="FTe-5t-tCA" eventType="touchUpInside" id="3FD-rr-lqe"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27b-nV-DF5">
                         <rect key="frame" x="293.5" y="0.0" width="19" height="22"/>
@@ -86,6 +89,9 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="myDropDownTapped:" destination="FTe-5t-tCA" eventType="touchUpInside" id="MsF-1h-i0d"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

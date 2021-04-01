@@ -27,6 +27,12 @@ class ChatRoomTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func partnerDropDownTapped(_ sender: UIButton) {
+        partnerAddMenuToButton()
+    }
+    @IBAction func myDropDownTapped(_ sender: UIButton) {
+        myAddMenuToButton()
+    }
     @IBOutlet weak var myButton: UIButton!
     @IBOutlet weak var partnerButton: UIButton!
     @IBOutlet weak var myName: UILabel!
@@ -41,6 +47,33 @@ class ChatRoomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var myMessageTextViewWidthConstraint: NSLayoutConstraint!
     
+    func myAddMenuToButton(){
+        let copy = UIAction(title: "コピー", image: UIImage(systemName: "doc.on.doc")) { (action) in
+            print("コピー")
+        }
+        let add = UIAction(title: "編集", image: UIImage(systemName: "pencil")) { (action) in
+            print("編集")
+        }
+        let trash = UIAction(title: "削除", image: UIImage(systemName: "trash")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
+            print("削除")
+        }
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [copy, add, trash])
+        myButton.menu = menu
+        myButton.showsMenuAsPrimaryAction = true
+    }
+    
+    func partnerAddMenuToButton(){
+        let translate = UIAction(title: "翻訳", image: UIImage(systemName: "character.ja")) { (action) in
+            print("翻訳")
+        }
+        let copy = UIAction(title: "コピー", image: UIImage(systemName: "doc.on.doc")) { (action) in
+            print("コピー")
+        }
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [translate, copy])
+        partnerButton.menu = menu
+        partnerButton.showsMenuAsPrimaryAction = true
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -51,10 +84,6 @@ class ChatRoomTableViewCell: UITableViewCell {
         myMessageTextView.layer.cornerRadius = 15
     }
     let imageSample = UIImageView()
-
-    
-    
-
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
