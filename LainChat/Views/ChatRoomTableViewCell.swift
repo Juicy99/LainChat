@@ -27,6 +27,10 @@ class ChatRoomTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var myButton: UIButton!
+    @IBOutlet weak var partnerButton: UIButton!
+    @IBOutlet weak var myName: UILabel!
+    @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var partnerName: UILabel!
     @IBOutlet weak var partnerMessageTextView: UITextView!
     @IBOutlet weak var userImageView: UIImageView!
@@ -42,6 +46,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         
         backgroundColor = .clear
         userImageView.layer.cornerRadius = 30
+        myImageView.layer.cornerRadius = 30
         partnerMessageTextView.layer.cornerRadius = 15
         myMessageTextView.layer.cornerRadius = 15
     }
@@ -64,11 +69,16 @@ class ChatRoomTableViewCell: UITableViewCell {
             partnerDateLabel.isHidden = true
             userImageView.isHidden = true
             partnerName.isHidden = true
+            partnerButton.isHidden = true
             
+            myImageView.isHidden = false
+            myName.isHidden = false
             myMessageTextView.isHidden = false
             myDateLabel.isHidden = false
+            myButton.isHidden = false
             
             if let message = message {
+                myName.text = message.name
                 myMessageTextView.text = message.message
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
                 myMessageTextViewWidthConstraint.constant = witdh
@@ -80,12 +90,18 @@ class ChatRoomTableViewCell: UITableViewCell {
             partnerDateLabel.isHidden = false
             userImageView.isHidden = false
             partnerName.isHidden = false
+            partnerButton.isHidden = false
+            
+            myImageView.isHidden = true
+            myName.isHidden = true
             myMessageTextView.isHidden = true
             myDateLabel.isHidden = true
+            myButton.isHidden = true
             }
         
+        
         if let urlString = message?.profileImageUrl, let url = URL(string: urlString) {
-                        Nuke.loadImage(with: url, into: userImageView)
+            Nuke.loadImage(with: url, into: userImageView) ;Nuke.loadImage(with: url, into: myImageView)
                     }
         
             if let message = message {
