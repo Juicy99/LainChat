@@ -46,10 +46,27 @@
                                     <action selector="chatButton:" destination="9ki-ob-EcP" eventType="touchUpInside" id="OoO-D5-drT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8b-xJ-QHA" customClass="RippleButton" customModule="LainChat" customModuleProvider="target">
+                                <rect key="frame" x="127" y="533" width="160" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="0.1196572078" blue="0.44164787370000003" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="DPD-5O-ty7"/>
+                                    <constraint firstAttribute="width" secondItem="Y8b-xJ-QHA" secondAttribute="height" multiplier="2:1" id="jDI-oP-2Pb"/>
+                                    <constraint firstAttribute="height" constant="80" id="zNa-FU-qys"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" systemColor="labelColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="setting:" destination="9ki-ob-EcP" eventType="touchUpInside" id="aPI-QZ-x4d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="12s-dl-eOI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Y8b-xJ-QHA" firstAttribute="leading" secondItem="gge-7v-o1m" secondAttribute="leading" id="Swr-pk-Gs5"/>
+                            <constraint firstItem="Y8b-xJ-QHA" firstAttribute="top" secondItem="gge-7v-o1m" secondAttribute="bottom" constant="5" id="Wvz-jn-PDn"/>
                             <constraint firstItem="gge-7v-o1m" firstAttribute="top" secondItem="12s-dl-eOI" secondAttribute="top" constant="360" id="cla-9x-YZl"/>
                             <constraint firstItem="gge-7v-o1m" firstAttribute="centerX" secondItem="4Bh-50-AfA" secondAttribute="centerX" id="k1u-Qx-pkd"/>
                         </constraints>
@@ -57,6 +74,7 @@
                     <navigationItem key="navigationItem" id="8Cp-rB-qgH"/>
                     <connections>
                         <outlet property="playButton" destination="gge-7v-o1m" id="ER5-f5-NhF"/>
+                        <outlet property="settingButton" destination="Y8b-xJ-QHA" id="mQq-Gb-E3S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhd-Eh-Bn7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

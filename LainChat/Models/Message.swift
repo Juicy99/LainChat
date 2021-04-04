@@ -15,6 +15,7 @@ class Message {
     let uid: String
     let createdAt: Timestamp
     let profileImageUrl: String
+    let messageId: String
     
     init(dic: [String: Any]) {
         self.name = dic["name"] as? String ?? ""
@@ -22,6 +23,7 @@ class Message {
         self.uid = dic["uid"] as? String ?? ""
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
         self.profileImageUrl = dic["proFileImageUrl"] as? String ?? ""
+        self.messageId = dic["messageId"] as? String ?? ""
     }
     
 }

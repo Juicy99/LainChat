@@ -13,6 +13,8 @@ class TopViewController: UIViewController {
     private var user: User?
     private var chatroom: ChatRoom?
     
+ 
+    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,8 @@ class TopViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.systemBlue]
         
         if Auth.auth().currentUser?.uid == nil {
-            let storyboar = UIStoryboard(name: "SignUp", bundle: nil)
-            let   SignUpViewController = storyboar.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+            let   SignUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
             SignUpViewController.modalPresentationStyle = .fullScreen
             self.present(SignUpViewController, animated: true, completion: nil)
             
@@ -34,6 +36,13 @@ class TopViewController: UIViewController {
              
             self.playButton.setImage(picture, for: .normal)
             self.view.addSubview(playButton)
+        
+        self.settingButton.frame = CGRect(x: (self.view.frame.size.width / 2) - 150, y: (self.view.frame.size.height / 2) - 50, width: 300, height: 100)
+         
+            let picture2 = UIImage(named: "Setting")
+             
+            self.settingButton.setImage(picture2, for: .normal)
+            self.view.addSubview(settingButton)
         
         
         
@@ -100,6 +109,15 @@ private func fetchLoginUserInfo() {
             self.user = user
         }
     }
+    
+    
+    @IBAction func setting(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+        let   SignUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        SignUpViewController.modalPresentationStyle = .fullScreen
+        self.present(SignUpViewController, animated: true, completion: nil)
+    }
+    
     
     @IBAction func chatButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)

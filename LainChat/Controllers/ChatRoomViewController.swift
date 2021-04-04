@@ -15,6 +15,8 @@ import UIKit
 import Firebase
 import ContextMenuSwift
 
+
+
 class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var user: User?
@@ -37,11 +39,18 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }()
     
-    
     @IBOutlet weak var chatRoomTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
+        button.setTitle("Back", for: .normal)
+        button.setImage(UIImage(named: "Back"), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.imageEdgeInsets = .init(top: 0, left: -8, bottom: 0, right: 0)
+        navigationItem.leftBarButtonItem = .init(customView: button)
         
         let image = UIImage(named: "ChatImage.jpg")
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.chatRoomTableView.frame.width, height: self.chatRoomTableView.frame.height))
@@ -51,8 +60,26 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         setupNotification()
         setupChatRoomTableView()
         fetchMessages()
-    }
+        
+         }
     
+    @objc private func back(_ sender: Any) {
+        let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        // Atomically add a new region to the "regions" array field.
+        washingtonRef.updateData([
+            "members": FieldValue.arrayRemove([uid])
+        ]){ [self] (err) in
+            if let err = err {
+                print("ChatRoom情報の保存に失敗しました。\(err)")
+                return
+            }
+        print("ログアウト")
+        navigationController?.popViewController(animated: true)
+    }
+    }
+
     private func setupNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -140,6 +167,11 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     
 }
 
+extension ChatRoomViewController:ChatRoomTableViewCellDelegate{
+    func tappedSendButton2() {
+        print("noo do ")
+    }
+}
 
 
 extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
@@ -155,6 +187,7 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
         guard let image = user?.profileImageUrl else {return}
         guard let uid = Auth.auth().currentUser?.uid else { return}
         chatInputAccessoryView.removetext()
+        let messageId = randomString(length: 20)
         
         
         let docData = [
@@ -162,10 +195,11 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
             "createdAt": Timestamp(),
             "uid": uid,
             "message": text,
-            "proFileImageUrl": image
+            "proFileImageUrl": image,
+            "messageId": messageId
         ] as [String : Any]
         
-        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
+        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document(messageId).setData(docData) { (err) in
             if let err = err {
                 print("メッセージ情報の保存に失敗しました。\(err)")
                 return
@@ -174,6 +208,21 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
             
         }
     }
+    
+    func randomString(length: Int) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+
+        var randomString = ""
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        return randomString
+    }
+    
+    
     
 }
 
@@ -196,6 +245,7 @@ extension ChatRoomViewController:UITableViewDelegate,UITableViewDataSource {
         cell.transform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: 0)
     return cell
     }
+
 }
 
 
