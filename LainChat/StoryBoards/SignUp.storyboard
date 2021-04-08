@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" constant="170" id="nXs-0S-Cdg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="プロフィール画像">
+                                <state key="normal" title="Profile Image">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

@@ -112,10 +112,9 @@ private func fetchLoginUserInfo() {
     
     
     @IBAction func setting(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-        let   SignUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-        SignUpViewController.modalPresentationStyle = .fullScreen
-        self.present(SignUpViewController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+        let   settingViewController = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+        navigationController?.pushViewController(settingViewController, animated: true)
     }
     
     

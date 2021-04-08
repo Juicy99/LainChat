@@ -24,6 +24,8 @@
 		9035662225DDBFDA00513BDD /* LainChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035662125DDBFDA00513BDD /* LainChatUITests.swift */; };
 		9035663325DDC06E00513BDD /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9035663225DDC06E00513BDD /* ChatList.storyboard */; };
 		9035663B25DDC1A700513BDD /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035663A25DDC1A700513BDD /* ChatListViewController.swift */; };
+		904B2A25261B3B8E00E037DA /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B2A24261B3B8E00E037DA /* Setting.storyboard */; };
+		904B2A2A261B3C4F00E037DA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B2A29261B3C4F00E037DA /* SettingViewController.swift */; };
 		9069501E25E855FF001B0D39 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9069501D25E855FF001B0D39 /* User.swift */; };
 		9076120A25F93A52008CDF99 /* Top.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9076120925F93A52008CDF99 /* Top.storyboard */; };
 		90A6F5C625F3524800B4CBFA /* MyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6F5C525F3524800B4CBFA /* MyStyle.swift */; };
@@ -80,6 +82,8 @@
 		9035662325DDBFDA00513BDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9035663225DDC06E00513BDD /* ChatList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
 		9035663A25DDC1A700513BDD /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		904B2A24261B3B8E00E037DA /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		904B2A29261B3C4F00E037DA /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9069501D25E855FF001B0D39 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9076120925F93A52008CDF99 /* Top.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Top.storyboard; sourceTree = "<group>"; };
 		90A6F5C525F3524800B4CBFA /* MyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyle.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 				9035663A25DDC1A700513BDD /* ChatListViewController.swift */,
 				9021174925E1554C00557E05 /* ChatRoomViewController.swift */,
 				9019415025E30DC500BD9988 /* SignUpViewController.swift */,
+				904B2A29261B3C4F00E037DA /* SettingViewController.swift */,
 				9031A43625ED9BB4007E5CB9 /* TopViewController.swift */,
 			);
 			path = Controllers;
@@ -153,6 +158,7 @@
 				9021174425E1549800557E05 /* ChatRoom.storyboard */,
 				9031494F25E306210091A6E6 /* SignUp.storyboard */,
 				9076120925F93A52008CDF99 /* Top.storyboard */,
+				904B2A24261B3B8E00E037DA /* Setting.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -370,6 +376,7 @@
 				9035663325DDC06E00513BDD /* ChatList.storyboard in Resources */,
 				9031495025E306210091A6E6 /* SignUp.storyboard in Resources */,
 				90C73E2725FD545E0050F5C5 /* ChatInputAccessoryView.xib in Resources */,
+				904B2A25261B3B8E00E037DA /* Setting.storyboard in Resources */,
 				90255F7125FDD05600522AA5 /* Assets.xcassets in Resources */,
 				9021174525E1549800557E05 /* ChatRoom.storyboard in Resources */,
 			);
@@ -502,6 +509,7 @@
 				9035660025DDBFDA00513BDD /* AppDelegate.swift in Sources */,
 				9019415125E30DC500BD9988 /* SignUpViewController.swift in Sources */,
 				9035663B25DDC1A700513BDD /* ChatListViewController.swift in Sources */,
+				904B2A2A261B3C4F00E037DA /* SettingViewController.swift in Sources */,
 				90E295A325EAEA2D003E0BF4 /* Message.swift in Sources */,
 				9031A43725ED9BB4007E5CB9 /* TopViewController.swift in Sources */,
 				9035660225DDBFDA00513BDD /* SceneDelegate.swift in Sources */,
