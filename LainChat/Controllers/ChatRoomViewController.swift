@@ -83,7 +83,7 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func addMessageToFirestore(){
         guard let name = user?.username else {return}
-        guard let image = user?.profileImageUrl else {return}
+        let image = "https://firebasestorage.googleapis.com/v0/b/lain-that.appspot.com/o/profile_image%2Fmosaic.png?alt=media&token=718ec2f9-0c36-41c9-8ca9-cb240c78f8af"
         
         
         let docData = [
