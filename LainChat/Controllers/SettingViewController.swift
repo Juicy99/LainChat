@@ -152,6 +152,9 @@ let imagePickerController = UIImagePickerController()
         Auth.auth().signInAnonymously() { (authResult, err) in
             if let err = err {
                 print("認証情報の保存に失敗しました。\(err)")
+                
+                self.dismiss(animated: true, completion: nil)
+             self.navigationController?.popViewController(animated: true)
                 return
             }
 
@@ -168,11 +171,17 @@ let imagePickerController = UIImagePickerController()
            storegeRef.putData(uploadimage, metadata: meta){(metadata,err) in
            if let err = err {
                print("FireStorageへの情報の保存に失敗しました。\(err)")
+            
+            self.dismiss(animated: true, completion: nil)
+         self.navigationController?.popViewController(animated: true)
                return
            }
                storegeRef.downloadURL{ (url, err) in
                    if let err = err {
                        print("FireStoreからのダウンロードに失敗しました。 \(err)")
+                    
+                    self.dismiss(animated: true, completion: nil)
+                 self.navigationController?.popViewController(animated: true)
                        return
                    }
                    
@@ -188,6 +197,9 @@ let imagePickerController = UIImagePickerController()
        Auth.auth().signInAnonymously() { (authResult, err) in
            if let err = err {
                print("認証情報の保存に失敗しました。\(err)")
+            
+            self.dismiss(animated: true, completion: nil)
+         self.navigationController?.popViewController(animated: true)
                return
            }
 
@@ -202,6 +214,9 @@ let imagePickerController = UIImagePickerController()
            Firestore.firestore().collection("users").document(uid).updateData(docData) { (err) in
                if let err = err {
                    print("Firestoreへの保存に失敗しました。\(err)")
+                
+                self.dismiss(animated: true, completion: nil)
+             self.navigationController?.popViewController(animated: true)
                    return
                }
                

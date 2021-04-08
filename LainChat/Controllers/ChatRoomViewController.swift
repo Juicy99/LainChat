@@ -44,6 +44,7 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
         button.setTitle("Back", for: .normal)
@@ -60,8 +61,7 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         setupNotification()
         setupChatRoomTableView()
         fetchMessages()
-        
-         }
+        }
     
     @objc private func back(_ sender: Any) {
         let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
@@ -77,7 +77,30 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         print("ログアウト")
         navigationController?.popViewController(animated: true)
+            addMessageToFirestore()
     }
+    }
+    
+    private func addMessageToFirestore(){
+        guard let name = user?.username else {return}
+        guard let image = user?.profileImageUrl else {return}
+        
+        
+        let docData = [
+            "name": name,
+            "createdAt": Timestamp(),
+            "message": name + "の反応が消えた",
+            "proFileImageUrl": image,
+        ] as [String : Any]
+        
+        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
+            if let err = err {
+                print("メッセージ情報の保存に失敗しました。\(err)")
+                return
+            }
+            print("メッセージの保存に成功しました。")
+            
+        }
     }
 
     private func setupNotification(){

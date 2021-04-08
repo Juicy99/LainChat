@@ -138,10 +138,34 @@ private func fetchLoginUserInfo() {
             print("ChatRoom情報の保存に成功しました。")
             chatRoomViewController.user = user
             navigationController?.pushViewController(chatRoomViewController, animated: true)
+            addMessageToFirestore()
     }
     }
     
+    private func addMessageToFirestore(){
+        guard let name = user?.username else {return}
+        guard let image = user?.profileImageUrl else {return}
+        
+        
+        let docData = [
+            "name": name,
+            "createdAt": Timestamp(),
+            "message": name + "さんがアクセスしました。",
+            "proFileImageUrl": image,
+        ] as [String : Any]
+        
+        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
+            if let err = err {
+                print("メッセージ情報の保存に失敗しました。\(err)")
+                return
+            }
+            print("メッセージの保存に成功しました。")
+            
+        }
+    }
+    
 }
+
 class RippleButton: UIButton {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
