@@ -152,14 +152,14 @@ let imagePickerController = UIImagePickerController()
                    }
                    
                    guard let urlString = url?.absoluteString else { return }
-                   self.createUserToFirestore(proFileImageUrl: urlString)
+                   self.createUserToFirestore(profileImageUrl: urlString)
                }
     
            }
        }
     }
 
-       private func createUserToFirestore(proFileImageUrl: String) {
+       private func createUserToFirestore(profileImageUrl: String) {
        Auth.auth().signInAnonymously() { (authResult, err) in
            if let err = err {
                print("認証情報の保存に失敗しました。\(err)")
@@ -172,7 +172,7 @@ let imagePickerController = UIImagePickerController()
            let docData = [
                "username": username,
                "createdAt": Timestamp(),
-               "proFileImageUrl": proFileImageUrl
+               "profileImageUrl": profileImageUrl
                ] as [String : Any]
            Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
                if let err = err {

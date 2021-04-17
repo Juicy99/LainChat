@@ -22,7 +22,7 @@ class Message {
         self.message = dic["message"] as? String ?? ""
         self.uid = dic["uid"] as? String ?? ""
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
-        self.profileImageUrl = dic["proFileImageUrl"] as? String ?? ""
+        self.profileImageUrl = dic["profileImageUrl"] as? String ?? ""
         self.messageId = dic["messageId"] as? String ?? ""
     }
     

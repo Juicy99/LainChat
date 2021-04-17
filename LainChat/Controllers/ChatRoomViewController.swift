@@ -90,7 +90,7 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
             "name": name,
             "createdAt": Timestamp(),
             "message": name + "の反応が消えた",
-            "proFileImageUrl": image,
+            "profileImageUrl": image,
         ] as [String : Any]
         
         Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
@@ -218,7 +218,7 @@ extension ChatRoomViewController:ChatInputAccessoryViewDelegate{
             "createdAt": Timestamp(),
             "uid": uid,
             "message": text,
-            "proFileImageUrl": image,
+            "profileImageUrl": image,
             "messageId": messageId
         ] as [String : Any]
         

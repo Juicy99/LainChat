@@ -22,7 +22,7 @@ class User {
         self.email = dic["email"] as? String ?? ""
         self.username = dic["username"] as? String ?? ""
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
-        self.profileImageUrl = dic["proFileImageUrl"] as? String ?? ""
+        self.profileImageUrl = dic["profileImageUrl"] as? String ?? ""
     }
     
     

@@ -151,7 +151,7 @@ private func fetchLoginUserInfo() {
             "name": name,
             "createdAt": Timestamp(),
             "message": name + "さんがアクセスしました。",
-            "proFileImageUrl": image,
+            "profileImageUrl": image,
         ] as [String : Any]
         
         Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
