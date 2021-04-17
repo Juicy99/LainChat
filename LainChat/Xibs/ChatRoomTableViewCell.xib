@@ -44,8 +44,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" text="メッセージがここに入ります" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
-                        <rect key="frame" x="169" y="28" width="250" height="95"/>
+                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="メッセージがここに入ります" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Don-vp-Hvc">
+                        <rect key="frame" x="169" y="28" width="250" height="35.5"/>
                         <color key="backgroundColor" red="0.0" green="0.11965720775339589" blue="0.44164787371134018" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="250" id="LEa-Gz-crV"/>
@@ -73,16 +73,6 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFE-yD-E9X">
-                        <rect key="frame" x="191.5" y="0.0" width="19" height="22"/>
-                        <state key="normal" image="ellipsis" catalog="system">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                        <connections>
-                            <action selector="partnerDropDownTapped:" destination="FTe-5t-tCA" eventType="touchUpInside" id="3FD-rr-lqe"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27b-nV-DF5">
                         <rect key="frame" x="293.5" y="0.0" width="19" height="22"/>
                         <state key="normal" image="ellipsis" catalog="system">
@@ -106,13 +96,11 @@
                     <constraint firstItem="mWB-V7-cuT" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" constant="5" id="Wgj-qG-Rqh"/>
                     <constraint firstItem="qpc-Wk-y5D" firstAttribute="top" secondItem="gwf-Ug-zGi" secondAttribute="bottom" constant="5" id="XTF-ks-bp3"/>
                     <constraint firstItem="mWB-V7-cuT" firstAttribute="leading" secondItem="gwf-Ug-zGi" secondAttribute="trailing" constant="10" id="dYG-h8-APC"/>
-                    <constraint firstItem="tFE-yD-E9X" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" id="eoD-Pu-aCh"/>
                     <constraint firstItem="oav-BZ-h4m" firstAttribute="leading" secondItem="zYz-QX-a4M" secondAttribute="trailing" constant="10" id="jJX-0u-C8w"/>
                     <constraint firstItem="27b-nV-DF5" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" id="kCE-RJ-s2a"/>
                     <constraint firstItem="gwf-Ug-zGi" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" id="mHR-aF-sUT"/>
                     <constraint firstItem="gwf-Ug-zGi" firstAttribute="leading" secondItem="XrL-kt-3AL" secondAttribute="trailing" constant="10" id="oNf-qT-VH0"/>
                     <constraint firstItem="oav-BZ-h4m" firstAttribute="leading" secondItem="Don-vp-Hvc" secondAttribute="trailing" constant="10" id="oYF-4z-xpB"/>
-                    <constraint firstItem="tFE-yD-E9X" firstAttribute="leading" secondItem="mWB-V7-cuT" secondAttribute="trailing" constant="10" id="pEF-ed-9I2"/>
                     <constraint firstItem="tIH-A5-hsj" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" constant="5" id="rhl-sq-V9D"/>
                     <constraint firstAttribute="trailing" secondItem="oav-BZ-h4m" secondAttribute="trailing" constant="15" id="wTG-nU-3mG"/>
                     <constraint firstItem="zYz-QX-a4M" firstAttribute="top" secondItem="lkO-1R-UaX" secondAttribute="top" id="xkv-7Y-qFj"/>
@@ -127,7 +115,6 @@
                 <outlet property="myMessageTextView" destination="Don-vp-Hvc" id="uAH-QW-nGQ"/>
                 <outlet property="myMessageTextViewWidthConstraint" destination="LEa-Gz-crV" id="LIP-dh-d9J"/>
                 <outlet property="myName" destination="zYz-QX-a4M" id="iBG-FL-aJe"/>
-                <outlet property="partnerButton" destination="tFE-yD-E9X" id="aXR-vV-7mA"/>
                 <outlet property="partnerDateLabel" destination="mWB-V7-cuT" id="dPt-3O-PV7"/>
                 <outlet property="partnerMessageTextView" destination="qpc-Wk-y5D" id="54t-jC-3si"/>
                 <outlet property="partnerName" destination="gwf-Ug-zGi" id="qQ1-Yy-mYC"/>

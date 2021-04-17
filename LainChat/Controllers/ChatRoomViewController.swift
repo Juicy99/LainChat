@@ -44,7 +44,6 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
         button.setTitle("Back", for: .normal)
@@ -161,7 +160,7 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func fetchMessages() {
-        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").addSnapshotListener( { (snapshots, err) in
+        Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").order(by: "createdAt",descending: true).limit(to: 30).addSnapshotListener( { (snapshots, err) in
             if let err = err {
                 print("メッセージ情報の取得に失敗しました。\(err)")
                 return
@@ -188,12 +187,6 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         })
     }
     
-}
-
-extension ChatRoomViewController:ChatRoomTableViewCellDelegate{
-    func tappedSendButton2() {
-        print("noo do ")
-    }
 }
 
 

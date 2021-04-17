@@ -11,13 +11,9 @@ import FirebaseStorage
 import FirebaseUI
 import Nuke
 
-protocol ChatRoomTableViewCellDelegate: class {
-    func tappedSendButton2()
-}
-
 class ChatRoomTableViewCell: UITableViewCell {
     
-    weak var delegate: ChatRoomTableViewCellDelegate?
+
     
     var message: Message? {
         didSet {
@@ -32,16 +28,10 @@ class ChatRoomTableViewCell: UITableViewCell {
 //            }
         }
     }
-    
-    @IBOutlet weak var chatRoomTableView: UITableView!
-    @IBAction func partnerDropDownTapped(_ sender: UIButton) {
-        partnerAddMenuToButton()
-    }
     @IBAction func myDropDownTapped(_ sender: UIButton) {
         myAddMenuToButton()
     }
     @IBOutlet weak var myButton: UIButton!
-    @IBOutlet weak var partnerButton: UIButton!
     @IBOutlet weak var myName: UILabel!
     @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var partnerName: UILabel!
@@ -53,68 +43,23 @@ class ChatRoomTableViewCell: UITableViewCell {
     @IBOutlet weak var messageTextViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var myMessageTextViewWidthConstraint: NSLayoutConstraint!
+
     
     func myAddMenuToButton(){
-        let copy = UIAction(title: "コピー", image: UIImage(systemName: "doc.on.doc")) { (action) in
-            
-            guard var text = self.myMessageTextView.text else { return }
-            if text == "" {
-                text = "空です"
-            }
-            self.tapCopy(copyText: text)
-            self.alert(title: "コピーしました", message: "")
-            
-        }
-        let add = UIAction(title: "編集", image: UIImage(systemName: "pencil")) { (action) in
-            
-            
-            Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document(self.message!.messageId).updateData([
-                "message": self.myMessageTextView.text ?? "message"
-            ]) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
-                }
-            }
-            print("編集")
-        }
         
         let trash = UIAction(title: "削除", image: UIImage(systemName: "trash")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
             Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document(self.message!.messageId).delete() { err in
                 if let err = err {
                     print("Error removing document: \(err)")
                 } else {
+                    self.alert(title: "サーバーから削除しました", message: "")
+                    print("削除")
                 }
             }
-            self.delegate?.tappedSendButton2()
-            print("削除")
         }
-        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [copy, add, trash])
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [trash])
         myButton.menu = menu
         myButton.showsMenuAsPrimaryAction = true
-    }
-
-    func partnerAddMenuToButton(){
-        let translate = UIAction(title: "翻訳", image: UIImage(systemName: "character.ja")) { (action) in
-            print("翻訳")
-        }
-        let copy = UIAction(title: "コピー", image: UIImage(systemName: "doc.on.doc")) { (action) in
-            guard var text = self.myMessageTextView.text else { return }
-            if text == "" {
-                text = "空です"
-            }
-            self.tapCopy(copyText: text)
-            self.alert(title: "コピーしました", message: "")
-            
-        }
-        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [translate, copy])
-        partnerButton.menu = menu
-        partnerButton.showsMenuAsPrimaryAction = true
-    }
-    
-    func tapCopy(copyText: String) {
-        UIPasteboard.general.string = copyText
     }
     
 
@@ -149,7 +94,6 @@ class ChatRoomTableViewCell: UITableViewCell {
             partnerDateLabel.isHidden = true
             userImageView.isHidden = true
             partnerName.isHidden = true
-            partnerButton.isHidden = true
             
             myImageView.isHidden = false
             myName.isHidden = false
@@ -170,7 +114,6 @@ class ChatRoomTableViewCell: UITableViewCell {
             partnerDateLabel.isHidden = false
             userImageView.isHidden = false
             partnerName.isHidden = false
-            partnerButton.isHidden = false
             
             myImageView.isHidden = true
             myName.isHidden = true
@@ -220,6 +163,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         formatter.locale = Locale(identifier: "ja_JP")
         return formatter.string(from: date)
     }
+    
     
 }
 extension UIView {
