@@ -125,21 +125,12 @@ private func fetchLoginUserInfo() {
         let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        // Atomically add a new region to the "regions" array field.
-        washingtonRef.updateData([
-            "members": FieldValue.arrayUnion([uid])
-        ]){ [self] (err) in
-            if let err = err {
-                print("ChatRoom情報の保存に失敗しました。\(err)")
-                return
-            }
             
             self.dismiss(animated: true, completion: nil)
             print("ChatRoom情報の保存に成功しました。")
             chatRoomViewController.user = user
             navigationController?.pushViewController(chatRoomViewController, animated: true)
             addMessageToFirestore()
-    }
     }
     
     private func addMessageToFirestore(){

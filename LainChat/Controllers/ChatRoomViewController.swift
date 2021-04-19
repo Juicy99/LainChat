@@ -72,21 +72,9 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc private func back(_ sender: Any) {
-        let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        // Atomically add a new region to the "regions" array field.
-        washingtonRef.updateData([
-            "members": FieldValue.arrayRemove([uid])
-        ]){ [self] (err) in
-            if let err = err {
-                print("ChatRoom情報の保存に失敗しました。\(err)")
-                return
-            }
         print("ログアウト")
         navigationController?.popViewController(animated: true)
             addMessageToFirestore()
-    }
     }
     
     private func addMessageToFirestore(){
