@@ -62,6 +62,15 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         fetchMessages()
         }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // 入力を反映させたテキストを取得する
+        let resultText: String = (textView.text! as NSString).replacingCharacters(in: range, with: text)
+        if resultText.count <= 300 {
+            return true
+        }
+        return false
+    }
+    
     @objc private func back(_ sender: Any) {
         let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -76,15 +85,13 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         print("ログアウト")
         navigationController?.popViewController(animated: true)
-            addLostMessageToFirestore()
+            addMessageToFirestore()
     }
     }
     
-    private func addLostMessageToFirestore(){
+    private func addMessageToFirestore(){
         guard let name = user?.username else {return}
         let image = "https://firebasestorage.googleapis.com/v0/b/lain-that.appspot.com/o/profile_image%2Fmosaic.png?alt=media&token=718ec2f9-0c36-41c9-8ca9-cb240c78f8af"
-        guard let uid = Auth.auth().currentUser?.uid else { return}
-        let messageId = randomString(length: 20)
         
         
         let docData = [
@@ -92,8 +99,6 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
             "createdAt": Timestamp(),
             "message": name + "の反応が消えた",
             "profileImageUrl": image,
-            "uid": uid + "さんがアクセスしました。",
-            "messageId": messageId
         ] as [String : Any]
         
         Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in

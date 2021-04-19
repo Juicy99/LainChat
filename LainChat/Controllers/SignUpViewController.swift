@@ -59,15 +59,6 @@ let imagePickerController = UIImagePickerController()
         super.viewWillDisappear(animated)
         self.removeObserver() // Notificationを画面が消えるときに削除
     }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // 入力を反映させたテキストを取得する
-        let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        if resultText.count <= 10 {
-            return true
-        }
-        return false
-    }
 
     // Notificationを設定
     func configureObserver() {
@@ -106,6 +97,15 @@ let imagePickerController = UIImagePickerController()
         })
     }
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 入力を反映させたテキストを取得する
+        let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if resultText.count <= 10 {
+            return true
+        }
+        return false
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         textField.resignFirstResponder() // Returnキーを押したときにキーボードを下げる

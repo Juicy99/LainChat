@@ -67,15 +67,6 @@ let imagePickerController = UIImagePickerController()
           super.viewWillDisappear(animated)
           self.removeObserver() // Notificationを画面が消えるときに削除
       }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // 入力を反映させたテキストを取得する
-        let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        if resultText.count <= 10 {
-            return true
-        }
-        return false
-    }
 
       // Notificationを設定
       func configureObserver() {
@@ -120,9 +111,31 @@ let imagePickerController = UIImagePickerController()
           return true
       }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 入力を反映させたテキストを取得する
+        let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if resultText.count <= 10 {
+            return true
+        }
+        return false
+    }
+    
     @objc private func back(_ sender: Any) {
+        let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        // Atomically add a new region to the "regions" array field.
+        washingtonRef.updateData([
+            "members": FieldValue.arrayRemove([uid])
+        ]){ [self] (err) in
+            if let err = err {
+                print("ChatRoom情報の保存に失敗しました。\(err)")
+                
+                return
+            }
         print("ログアウト")
         navigationController?.popViewController(animated: true)
+    }
     }
     
     func addBackground(name: String) {

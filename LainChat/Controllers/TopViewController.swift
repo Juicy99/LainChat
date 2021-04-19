@@ -121,15 +121,30 @@ private func fetchLoginUserInfo() {
     @IBAction func chatButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
         let chatRoomViewController = storyboard.instantiateViewController(identifier: "ChatRoomViewController") as! ChatRoomViewController
-        navigationController?.pushViewController(chatRoomViewController, animated: true)
-        addLoginMessageToFirestore()
+        
+        let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        // Atomically add a new region to the "regions" array field.
+        washingtonRef.updateData([
+            "members": FieldValue.arrayUnion([uid])
+        ]){ [self] (err) in
+            if let err = err {
+                print("ChatRoom情報の保存に失敗しました。\(err)")
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            print("ChatRoom情報の保存に成功しました。")
+            chatRoomViewController.user = user
+            navigationController?.pushViewController(chatRoomViewController, animated: true)
+            addMessageToFirestore()
+    }
     }
     
-    private func addLoginMessageToFirestore(){
+    private func addMessageToFirestore(){
         guard let name = user?.username else {return}
-        let image = "https://firebasestorage.googleapis.com/v0/b/lain-that.appspot.com/o/profile_image%2Fmosaic.png?alt=media&token=718ec2f9-0c36-41c9-8ca9-cb240c78f8af"
-        guard let uid = Auth.auth().currentUser?.uid else { return}
-        let messageId = randomString(length: 20)
+        guard let image = user?.profileImageUrl else {return}
         
         
         let docData = [
@@ -137,8 +152,6 @@ private func fetchLoginUserInfo() {
             "createdAt": Timestamp(),
             "message": name + "さんがアクセスしました。",
             "profileImageUrl": image,
-            "uid": uid + "さんがアクセスしました。",
-            "messageId": messageId
         ] as [String : Any]
         
         Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document().setData(docData) { (err) in
@@ -149,19 +162,6 @@ private func fetchLoginUserInfo() {
             print("メッセージの保存に成功しました。")
             
         }
-    }
-    
-    func randomString(length: Int) -> String {
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-
-        var randomString = ""
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        return randomString
     }
     
 }
