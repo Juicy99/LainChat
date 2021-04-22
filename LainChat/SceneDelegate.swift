@@ -27,19 +27,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        // Atomically add a new region to the "regions" array field.
-        washingtonRef.updateData([
-            "members": FieldValue.arrayRemove([uid])
-        ]
-        
-        ){ [] (err) in
-            if let err = err {
-                print("ChatRoom情報の保存に失敗しました。\(err)")
-                return
-            }
-    }
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.

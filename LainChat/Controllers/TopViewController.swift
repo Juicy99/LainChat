@@ -121,8 +121,6 @@ private func fetchLoginUserInfo() {
     @IBAction func chatButton(_ sender: UIButton) {
         let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
         let chatRoomViewController = storyboard.instantiateViewController(identifier: "ChatRoomViewController") as! ChatRoomViewController
-        
-        let washingtonRef = Firestore.firestore().collection("chatRooms").document("lobby")
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
             
@@ -130,10 +128,10 @@ private func fetchLoginUserInfo() {
             print("ChatRoom情報の保存に成功しました。")
             chatRoomViewController.user = user
             navigationController?.pushViewController(chatRoomViewController, animated: true)
-            addMessageToFirestore()
+        addLoginMessageToFirestore()
     }
     
-    private func addMessageToFirestore(){
+    private func addLoginMessageToFirestore(){
         guard let name = user?.username else {return}
         guard let image = user?.profileImageUrl else {return}
         
