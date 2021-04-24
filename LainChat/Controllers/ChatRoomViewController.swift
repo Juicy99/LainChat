@@ -13,7 +13,6 @@
 
 import UIKit
 import Firebase
-import ContextMenuSwift
 
 
 
@@ -120,7 +119,6 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
-        print("keboa")
        guard let userInfo = notification.userInfo else { return }
         
         if let keyboradFrame = (userInfo[ UIResponder.keyboardFrameEndUserInfoKey ] as AnyObject).cgRectValue{
@@ -141,7 +139,6 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func keyboardWillHide(){
-        print("keboasss")
         chatRoomTableView.contentInset = tableViewIndicatorInset
         chatRoomTableView.scrollIndicatorInsets = tableViewIndicatorInset
     }

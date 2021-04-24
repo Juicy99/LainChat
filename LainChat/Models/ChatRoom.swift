@@ -10,12 +10,6 @@ import Firebase
 
 class ChatRoom {
     
-    let members: [String]
-    
     var documentId: String?
-    
-    init(dic: [String: Any]) {
-        self.members = dic["members"] as? [String] ?? [String]()
-    }
     
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ei-send.png",
+      "filename" : "touch.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ei-send-1.png",
+      "filename" : "touch-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ei-send-2.png",
+      "filename" : "touch-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -131,41 +131,36 @@ let imagePickerController = UIImagePickerController()
         self.backgroundImage.sendSubviewToBack(imageViewBackground)
         }
     @objc private func tappedRegisterButton() {
+        guard let image = self.profileImageButton.imageView?.image else {return}
+       guard let uploadImage = image.jpegData(compressionQuality: 0.01) else {return}
+        
         progress.show(message: "頑張ってます・・",style: MyStyle())
         
-        Auth.auth().signInAnonymously() { (authResult, err) in
+        let fileName = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
+        
+        storageRef.putData(uploadImage, metadata: nil) { (matadata, err) in
             if let err = err {
-                print("認証情報の保存に失敗しました。\(err)")
+                print("Firestorageへの情報の保存に失敗しました。\(err)")
+                self.dismiss(animated: true, completion: nil)
+             self.navigationController?.popViewController(animated: true)
                 return
             }
-
-            guard let user = authResult?.user else { return } // true
+            
+            storageRef.downloadURL { (url, err) in
+                if let err = err {
+                    print("Firestorageからのダウンロードに失敗しました。\(err)")
+                    self.dismiss(animated: true, completion: nil)
+                 self.navigationController?.popViewController(animated: true)
+                    return
+                }
+                
+                guard let urlString = url?.absoluteString else { return }
+                self.createUserToFirestore(profileImageUrl: urlString)
+            }
+            
+        }
         
-            guard let image = self.profileImageButton.imageView?.image else {return}
-           guard let uploadimage = image.jpegData(compressionQuality: 0.01) else {return}
-           
-           let fileName = user.uid
-           let storegeRef = Storage.storage().reference().child("profile_image").child(fileName)
-            let meta = StorageMetadata()
-            meta.contentType = "image/jpeg"
-           
-           storegeRef.putData(uploadimage, metadata: meta){(metadata,err) in
-           if let err = err {
-               print("FireStorageへの情報の保存に失敗しました。\(err)")
-               return
-           }
-               storegeRef.downloadURL{ (url, err) in
-                   if let err = err {
-                       print("FireStoreからのダウンロードに失敗しました。 \(err)")
-                       return
-                   }
-                   
-                   guard let urlString = url?.absoluteString else { return }
-                   self.createUserToFirestore(profileImageUrl: urlString)
-               }
-    
-           }
-       }
     }
 
        private func createUserToFirestore(profileImageUrl: String) {

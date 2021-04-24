@@ -34,11 +34,11 @@ class ChatRoomTableViewCell: UITableViewCell {
     @IBOutlet weak var myButton: UIButton!
     @IBOutlet weak var myName: UILabel!
     @IBOutlet weak var myImageView: UIImageView!
-    @IBOutlet weak var partnerName: UILabel!
-    @IBOutlet weak var partnerMessageTextView: UITextView!
+    @IBOutlet weak var otherName: UILabel!
+    @IBOutlet weak var otherMessageTextView: UITextView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var myMessageTextView: UITextView!
-    @IBOutlet weak var partnerDateLabel: UILabel!
+    @IBOutlet weak var otherDateLabel: UILabel!
     @IBOutlet weak var myDateLabel: UILabel!
     @IBOutlet weak var messageTextViewWidthConstraint: NSLayoutConstraint!
     
@@ -76,7 +76,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         backgroundColor = .clear
         userImageView.layer.cornerRadius = 30
         myImageView.layer.cornerRadius = 30
-        partnerMessageTextView.layer.cornerRadius = 15
+        otherMessageTextView.layer.cornerRadius = 15
         myMessageTextView.layer.cornerRadius = 15
     }
     let imageSample = UIImageView()
@@ -90,10 +90,10 @@ class ChatRoomTableViewCell: UITableViewCell {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         if uid == message?.uid {
-            partnerMessageTextView.isHidden = true
-            partnerDateLabel.isHidden = true
+            otherMessageTextView.isHidden = true
+            otherDateLabel.isHidden = true
             userImageView.isHidden = true
-            partnerName.isHidden = true
+            otherName.isHidden = true
             
             myImageView.isHidden = false
             myName.isHidden = false
@@ -110,10 +110,10 @@ class ChatRoomTableViewCell: UITableViewCell {
                 myDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
             }
         } else {
-            partnerMessageTextView.isHidden = false
-            partnerDateLabel.isHidden = false
+            otherMessageTextView.isHidden = false
+            otherDateLabel.isHidden = false
             userImageView.isHidden = false
-            partnerName.isHidden = false
+            otherName.isHidden = false
             
             myImageView.isHidden = true
             myName.isHidden = true
@@ -128,11 +128,11 @@ class ChatRoomTableViewCell: UITableViewCell {
                     }
         
             if let message = message {
-                partnerName.text = message.name
-                partnerMessageTextView.text = message.message
+                otherName.text = message.name
+                otherMessageTextView.text = message.message
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
                 messageTextViewWidthConstraint.constant = witdh
-                partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
+                otherDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
         }
         
     }

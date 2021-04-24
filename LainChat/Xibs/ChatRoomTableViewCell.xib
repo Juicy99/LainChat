@@ -115,9 +115,9 @@
                 <outlet property="myMessageTextView" destination="Don-vp-Hvc" id="uAH-QW-nGQ"/>
                 <outlet property="myMessageTextViewWidthConstraint" destination="LEa-Gz-crV" id="LIP-dh-d9J"/>
                 <outlet property="myName" destination="zYz-QX-a4M" id="iBG-FL-aJe"/>
-                <outlet property="partnerDateLabel" destination="mWB-V7-cuT" id="dPt-3O-PV7"/>
-                <outlet property="partnerMessageTextView" destination="qpc-Wk-y5D" id="54t-jC-3si"/>
-                <outlet property="partnerName" destination="gwf-Ug-zGi" id="qQ1-Yy-mYC"/>
+                <outlet property="otherDateLabel" destination="mWB-V7-cuT" id="dPt-3O-PV7"/>
+                <outlet property="otherMessageTextView" destination="qpc-Wk-y5D" id="54t-jC-3si"/>
+                <outlet property="otherName" destination="gwf-Ug-zGi" id="qQ1-Yy-mYC"/>
                 <outlet property="userImageView" destination="XrL-kt-3AL" id="CbT-Tw-lZi"/>
             </connections>
             <point key="canvasLocation" x="-144.92753623188406" y="38.504464285714285"/>
