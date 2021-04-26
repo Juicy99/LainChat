@@ -1,0 +1,6 @@
+framework module Pods_LainChatTests {
+  umbrella header "Pods-LainChatTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
