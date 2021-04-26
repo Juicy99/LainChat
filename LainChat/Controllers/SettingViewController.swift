@@ -221,7 +221,6 @@ let imagePickerController = UIImagePickerController()
     extension SettingViewController: UITextFieldDelegate {
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            print(" : ", textField.text)
             let usernameIsEmpty = userNameTextField.text?.isEmpty ?? false
             
             if usernameIsEmpty{

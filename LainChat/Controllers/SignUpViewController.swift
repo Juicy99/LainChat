@@ -130,36 +130,63 @@ let imagePickerController = UIImagePickerController()
             // 加えたsubviewを、最背面に設置する
         self.backgroundImage.sendSubviewToBack(imageViewBackground)
         }
+    
     @objc private func tappedRegisterButton() {
-        guard let image = self.profileImageButton.imageView?.image else {return}
-       guard let uploadImage = image.jpegData(compressionQuality: 0.01) else {return}
-        
-        progress.show(message: "頑張ってます・・",style: MyStyle())
-        
-        let fileName = NSUUID().uuidString
-        let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
-        
-        storageRef.putData(uploadImage, metadata: nil) { (matadata, err) in
-            if let err = err {
-                print("Firestorageへの情報の保存に失敗しました。\(err)")
-                self.dismiss(animated: true, completion: nil)
-             self.navigationController?.popViewController(animated: true)
-                return
-            }
+        let alert: UIAlertController = UIAlertController(title: "サービスを利用するには利用規約に同意が必要です。", message:  "利用規約を確認してください", preferredStyle:  UIAlertController.Style.alert)
+        // 確定ボタンの処理
+        let confirmAction: UIAlertAction = UIAlertAction(title: "利用規約に同意", style: UIAlertAction.Style.default, handler:{
+            // 確定ボタンが押された時の処理をクロージャ実装する
+            (action: UIAlertAction!) -> Void in
+            //実際の処理
+            guard let image = self.profileImageButton.imageView?.image else {return}
+           guard let uploadImage = image.jpegData(compressionQuality: 0.01) else {return}
             
-            storageRef.downloadURL { (url, err) in
+            self.progress.show(message: "頑張ってます・・",style: MyStyle())
+            
+            let fileName = NSUUID().uuidString
+            let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
+            
+            storageRef.putData(uploadImage, metadata: nil) { (matadata, err) in
                 if let err = err {
-                    print("Firestorageからのダウンロードに失敗しました。\(err)")
+                    print("Firestorageへの情報の保存に失敗しました。\(err)")
                     self.dismiss(animated: true, completion: nil)
                  self.navigationController?.popViewController(animated: true)
                     return
                 }
                 
-                guard let urlString = url?.absoluteString else { return }
-                self.createUserToFirestore(profileImageUrl: urlString)
+                storageRef.downloadURL { (url, err) in
+                    if let err = err {
+                        print("Firestorageからのダウンロードに失敗しました。\(err)")
+                        self.dismiss(animated: true, completion: nil)
+                     self.navigationController?.popViewController(animated: true)
+                        return
+                    }
+                    
+                    guard let urlString = url?.absoluteString else { return }
+                    self.createUserToFirestore(profileImageUrl: urlString)
+                }
+                
             }
-            
-        }
+            print("確定")
+        })
+        // キャンセルボタンの処理
+        let cancelAction: UIAlertAction = UIAlertAction(title: "利用規約をみる", style: UIAlertAction.Style.cancel, handler:{
+            // キャンセルボタンが押された時の処理をクロージャ実装する
+            (action: UIAlertAction!) -> Void in
+            //実際の処理
+            let url = URL(string: "https://juicy997.hatenablog.com/entry/2021/04/27/004621")!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+            print("キャンセル")
+        })
+
+        //UIAlertControllerにキャンセルボタンと確定ボタンをActionを追加
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+
+        //実際にAlertを表示する
+        present(alert, animated: true, completion: nil)
         
     }
 
@@ -202,7 +229,6 @@ let imagePickerController = UIImagePickerController()
     extension SignUpViewController: UITextFieldDelegate {
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            print(" : ", textField.text)
             let usernameIsEmpty = userNameTextField.text?.isEmpty ?? false
             
             if usernameIsEmpty{
