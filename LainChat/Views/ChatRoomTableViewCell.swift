@@ -31,6 +31,11 @@ class ChatRoomTableViewCell: UITableViewCell {
     @IBAction func myDropDownTapped(_ sender: UIButton) {
         myAddMenuToButton()
     }
+    @IBAction func otherAction(_ sender: Any) {
+        otherAddMenuToButton()
+    }
+    
+    @IBOutlet weak var otherButton: UIButton!
     @IBOutlet weak var myButton: UIButton!
     @IBOutlet weak var myName: UILabel!
     @IBOutlet weak var myImageView: UIImageView!
@@ -60,6 +65,23 @@ class ChatRoomTableViewCell: UITableViewCell {
         let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [trash])
         myButton.menu = menu
         myButton.showsMenuAsPrimaryAction = true
+    }
+    
+    func otherAddMenuToButton(){
+        
+        let trash = UIAction(title: "削除", image: UIImage(systemName: "trash")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
+            Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document(self.message!.messageId).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    self.alert(title: "サーバーから削除しました", message: "")
+                    print("削除")
+                }
+            }
+        }
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [trash])
+        otherButton.menu = menu
+        otherButton.showsMenuAsPrimaryAction = true
     }
     
 
@@ -94,6 +116,7 @@ class ChatRoomTableViewCell: UITableViewCell {
             otherDateLabel.isHidden = true
             userImageView.isHidden = true
             otherName.isHidden = true
+            otherButton.isHidden = true
             
             myImageView.isHidden = false
             myName.isHidden = false
@@ -114,6 +137,7 @@ class ChatRoomTableViewCell: UITableViewCell {
             otherDateLabel.isHidden = false
             userImageView.isHidden = false
             otherName.isHidden = false
+            otherButton.isHidden = false
             
             myImageView.isHidden = true
             myName.isHidden = true

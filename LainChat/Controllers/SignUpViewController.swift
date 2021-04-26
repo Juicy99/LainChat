@@ -167,7 +167,6 @@ let imagePickerController = UIImagePickerController()
                 }
                 
             }
-            print("確定")
         })
         // キャンセルボタンの処理
         let cancelAction: UIAlertAction = UIAlertAction(title: "利用規約をみる", style: UIAlertAction.Style.cancel, handler:{
@@ -178,7 +177,6 @@ let imagePickerController = UIImagePickerController()
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }
-            print("キャンセル")
         })
 
         //UIAlertControllerにキャンセルボタンと確定ボタンをActionを追加
