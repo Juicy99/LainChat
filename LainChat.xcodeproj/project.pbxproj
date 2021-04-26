@@ -58,7 +58,6 @@
 		5CA16E9A9E0974370CEA4509 /* Pods_LainChat_LainChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LainChat_LainChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6989FA8D6E2D76E373373C19 /* Pods_LainChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LainChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9019415025E30DC500BD9988 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		901CC99B25F4C9CF00B37D8B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9021174425E1549800557E05 /* ChatRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatRoom.storyboard; sourceTree = "<group>"; };
 		9021174925E1554C00557E05 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		9021174E25E15B3D00557E05 /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
@@ -206,7 +205,6 @@
 				9021174025E149B800557E05 /* StoryBoards */,
 				9021173F25E1498100557E05 /* Controllers */,
 				903565FF25DDBFDA00513BDD /* AppDelegate.swift */,
-				901CC99B25F4C9CF00B37D8B /* README.md */,
 				90A6F5C525F3524800B4CBFA /* MyStyle.swift */,
 				9035660125DDBFDA00513BDD /* SceneDelegate.swift */,
 				9035660A25DDBFDA00513BDD /* LaunchScreen.storyboard */,

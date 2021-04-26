@@ -191,9 +191,10 @@ let imagePickerController = UIImagePickerController()
         guard let username = self.userNameTextField.text else { return }
         let docData = [
             "username": username,
+            "createdAt": Timestamp(),
             "profileImageUrl": profileImageUrl
             ] as [String : Any]
-        Firestore.firestore().collection("users").document(uid).updateData(docData) { (err) in
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
             if let err = err {
                 print("Firestoreへの保存に失敗しました。\(err)")
              self.dismiss(animated: true, completion: nil)
