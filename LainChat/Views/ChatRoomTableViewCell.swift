@@ -69,7 +69,7 @@ class ChatRoomTableViewCell: UITableViewCell {
     
     func otherAddMenuToButton(){
         
-        let trash = UIAction(title: "削除", image: UIImage(systemName: "trash")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
+        let report = UIAction(title: "報告", image: UIImage(systemName: "mail")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
             Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document(self.message!.messageId).delete() { err in
                 if let err = err {
                     print("Error removing document: \(err)")
@@ -79,7 +79,7 @@ class ChatRoomTableViewCell: UITableViewCell {
                 }
             }
         }
-        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [trash])
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [report])
         otherButton.menu = menu
         otherButton.showsMenuAsPrimaryAction = true
     }
