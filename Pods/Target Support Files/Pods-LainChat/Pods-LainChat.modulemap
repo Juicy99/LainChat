@@ -1,6 +1,0 @@
-framework module Pods_LainChat {
-  umbrella header "Pods-LainChat-umbrella.h"
-
-  export *
-  module * { export * }
-}
