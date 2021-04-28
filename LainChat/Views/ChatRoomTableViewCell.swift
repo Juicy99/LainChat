@@ -110,14 +110,17 @@ class ChatRoomTableViewCell: UITableViewCell {
         }
     }
     
-    func blockUser() {
-            guard let uid = Auth.auth().currentUser?.uid else { return }
+    private func blockUser(){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let blockUserId = message?.uid ?? String()
         
-        let blockUserData = [
-            "blockUserId": message?.uid ?? String(),
+        let blockData = [
+            "name": message?.name ?? String(),
+            "uid": message?.uid ?? String(),
+            "profileImageUrl": message?.profileImageUrl ?? String()
         ] as [String : Any]
-
-        Firestore.firestore().collection("blockUsers").document(uid).setData(blockUserData) { (err) in
+        
+        Firestore.firestore().collection("users").document(uid).collection("BlockList").document(blockUserId).setData(blockData) { (err) in
             if let err = err {
                 print("ブロック情報の保存に失敗しました。\(err)")
                 return
@@ -125,7 +128,7 @@ class ChatRoomTableViewCell: UITableViewCell {
             self.alert(title: "ユーザーをブロックしました。", message: "")
             
         }
-        }
+    }
     
     func randomString(length: Int) -> String {
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

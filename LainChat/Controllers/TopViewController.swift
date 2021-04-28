@@ -97,7 +97,7 @@ class TopViewController: UIViewController {
 private func fetchLoginUserInfo() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+    Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
                 print("ユーザー情報の取得に失敗しました。\(err)")
                 return
