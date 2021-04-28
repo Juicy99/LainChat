@@ -1,1 +1,0 @@
-#import <MailCore/MailCore.h>
