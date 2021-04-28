@@ -231,10 +231,10 @@ let imagePickerController = UIImagePickerController()
             
             if usernameIsEmpty{
                 registerButton.isEnabled = false
-                registerButton.backgroundColor = .systemGray5
+                registerButton.backgroundColor = .gray
             } else{
                 registerButton.isEnabled = true
-                registerButton.backgroundColor = .gray
+                registerButton.backgroundColor = .systemGray5
             }
         }
         

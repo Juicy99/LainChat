@@ -70,27 +70,77 @@ class ChatRoomTableViewCell: UITableViewCell {
     func otherAddMenuToButton(){
         
         let report = UIAction(title: "報告", image: UIImage(systemName: "mail")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
-            Firestore.firestore().collection("chatRooms").document("lobby").collection("messages").document(self.message!.messageId).delete() { err in
-                if let err = err {
-                    print("Error removing document: \(err)")
-                } else {
-                    self.alert(title: "サーバーから削除しました", message: "")
-                    print("削除")
-                }
-            }
+            self.addReportToFirestore()
         }
-        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [report])
+        let block = UIAction(title: "ブロック", image: UIImage(systemName: "person.fill.xmark")?.withTintColor(.red,renderingMode: .alwaysOriginal)) { (action) in
+            self.blockUser()
+        }
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [report,block])
         otherButton.menu = menu
         otherButton.showsMenuAsPrimaryAction = true
     }
     
-
+    
     
     func alert(title: String, message: String)  {
          let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         self.parentViewController()?.present(alert, animated: true, completion: nil)
         alert.dismiss(animated: false, completion: nil)
      }
+    
+    private func addReportToFirestore(){
+        let reportId = randomString(length: 20)
+        
+        let reportData = [
+            "name": message?.name ?? String(),
+            "createdAt": Timestamp(),
+            "uid": message?.uid ?? String(),
+            "message": message?.message ?? String(),
+            "profileImageUrl": message?.profileImageUrl ?? String(),
+            "messageId": message?.messageId ?? String()
+        ] as [String : Any]
+        
+        Firestore.firestore().collection("chatRooms").document("lobby").collection("reports").document(reportId).setData(reportData) { (err) in
+            if let err = err {
+                print("レポート情報の保存に失敗しました。\(err)")
+                return
+            }
+            self.alert(title: "送信されました。\nメールからも\nお問い合わせください。", message: "")
+            
+        }
+    }
+    
+    func blockUser() {
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let blockUserData = [
+            "blockUserId": message?.uid ?? String(),
+        ] as [String : Any]
+
+        Firestore.firestore().collection("blockUsers").document(uid).setData(blockUserData) { (err) in
+            if let err = err {
+                print("ブロック情報の保存に失敗しました。\(err)")
+                return
+            }
+            self.alert(title: "ユーザーをブロックしました。", message: "")
+            
+        }
+        }
+    
+    func randomString(length: Int) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+
+        var randomString = ""
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        return randomString
+    }
+    
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

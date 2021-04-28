@@ -30,7 +30,7 @@ let imagePickerController = UIImagePickerController()
         
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
-        button.setTitle("Back", for: .normal)
+        button.setTitle("", for: .normal)
         button.setImage(UIImage(named: "Back"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.imageEdgeInsets = .init(top: 0, left: -8, bottom: 0, right: 0)
@@ -225,10 +225,10 @@ let imagePickerController = UIImagePickerController()
             
             if usernameIsEmpty{
                 registerButton.isEnabled = false
-                registerButton.backgroundColor = .systemGray5
+                registerButton.backgroundColor = .gray
             } else{
                 registerButton.isEnabled = true
-                registerButton.backgroundColor = .gray
+                registerButton.backgroundColor = .systemGray5
             }
         }
         

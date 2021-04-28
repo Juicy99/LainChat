@@ -45,7 +45,7 @@ class ChatRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
-        button.setTitle("Back", for: .normal)
+        button.setTitle("", for: .normal)
         button.setImage(UIImage(named: "Back"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.imageEdgeInsets = .init(top: 0, left: -8, bottom: 0, right: 0)
