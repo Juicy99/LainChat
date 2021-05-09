@@ -20,7 +20,7 @@ TOP画面のアニメーション
 ![iPhone 12 - lain4](https://user-images.githubusercontent.com/69748880/115953592-5eef9800-a527-11eb-9eaf-80fa02f425d1.png)  
 
 このアプリは2028年7月6日までの期間限定で二次創作を許諾しているlainTTLに基づいて制作しています。  
-lainTTLガイドライン（https://www.nbcuni.co.jp/rondorobe/anime/lain/ttl/）. 
+lainTTLガイドライン: https://www.nbcuni.co.jp/rondorobe/anime/lain/ttl/
 
 Special thanks  
 -Manga Blood- brush set  
